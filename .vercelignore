@@ -1,0 +1,10 @@
+# Archivos que no deben subirse a Vercel
+.env.local
+.env*.local
+.git
+node_modules
+.next
+tests
+playwright-report
+test-results
+.vscode

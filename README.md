@@ -2,6 +2,32 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+### 1. Configurar Variables de Entorno
+
+Crea un archivo `.env.local` en la raíz del proyecto copiando el archivo de ejemplo:
+
+```bash
+cp .env.example .env.local
+```
+
+Luego edita `.env.local` y reemplaza los valores con tus credenciales reales:
+
+- **OPENAI_API_KEY**: Obtén tu API key en [OpenAI Platform](https://platform.openai.com/api-keys)
+- **RESEND_API_KEY**: Obtén tu API key en [Resend](https://resend.com/api-keys)
+- **UMAMI\_\***: (Opcional) Variables para Umami Analytics desde [Umami Cloud](https://cloud.umami.is)
+
+**⚠️ IMPORTANTE**: Nunca compartas o subas tu archivo `.env.local` a Git. Este archivo ya está incluido en `.gitignore`.
+
+### 2. Instalar Dependencias
+
+```bash
+npm install
+# o
+pnpm install
+```
+
+### 3. Ejecutar el Servidor de Desarrollo
+
 First, run the development server:
 
 ```bash

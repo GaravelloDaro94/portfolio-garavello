@@ -1,0 +1,14 @@
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "env": {
+    "OPENAI_API_KEY": "@openai_api_key",
+    "RESEND_API_KEY": "@resend_api_key",
+    "UMAMI_TOKEN": "@umami_token",
+    "NEXT_PUBLIC_UMAMI_WEBSITE_ID": "@umami_website_id",
+    "NEXT_PUBLIC_UMAMI_URL": "@umami_url",
+    "NEXT_PUBLIC_UMAMI_API_URL": "@umami_api_url"
+  }
+}

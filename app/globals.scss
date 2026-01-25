@@ -1,0 +1,152 @@
+@use "tailwindcss";
+
+// CSS Variables
+:root {
+  --foreground: #1f2937;
+  --background: #f9fafb;
+}
+
+.dark {
+  --foreground: #e5e7eb;
+  --background: #1c1c1c;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-space-grotesk), Arial, Helvetica, sans-serif;
+  }
+}
+
+// Global Styles
+* {
+  color: var(--foreground);
+}
+
+// Placeholder styling
+::placeholder {
+  color: #4b5563 !important;
+  opacity: 1;
+}
+
+.dark ::placeholder {
+  color: #d1d5db !important;
+  opacity: 1;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background: linear-gradient(270deg, #a7c7e7, #b8e0d2, #f7c8e0);
+  background-size: 600% 600%;
+  animation: gradientMove 20s ease infinite;
+  font-family: var(--font-nunito-sans), Arial, Helvetica, sans-serif;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100vh;
+
+  &.dark {
+    background: var(--background);
+    animation: none;
+    font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  }
+}
+
+// Typography
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-raleway), Arial, Helvetica, sans-serif;
+}
+
+// Scrollbar styling
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f3f4f6;
+
+  .dark & {
+    background: #111827;
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  background: #9ca3af;
+  border-radius: 4px;
+
+  &:hover {
+    background: #6b7280;
+  }
+
+  .dark & {
+    background: #4b5563;
+  }
+}
+
+// Hide scrollbar for horizontal scroll
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// Animations
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes drawStroke {
+  0% {
+    stroke-dashoffset: 1600;
+    opacity: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+// Wave Stripes Background
+.wave-stripes {
+  opacity: 1;
+}
+
+.stripe-path {
+  stroke-dasharray: 1600;
+  stroke-dashoffset: 1600;
+  animation: drawStroke 1.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+.stripe-1 {
+  animation-delay: 0s;
+}
+
+.stripe-2 {
+  animation-delay: 0.3s;
+}
+
+.stripe-3 {
+  animation-delay: 0.6s;
+}
