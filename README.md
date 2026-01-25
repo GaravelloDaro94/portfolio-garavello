@@ -1,5 +1,38 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## 🚀 Deploy Rápido
+
+### Opción 1: Script Automático (Recomendado)
+
+**Windows (PowerShell):**
+```powershell
+.\deploy.ps1
+```
+
+**Mac/Linux (Bash):**
+```bash
+chmod +x deploy.sh
+./deploy.sh
+```
+
+### Opción 2: Manual
+
+1. **Crear repo en GitHub**: https://github.com/new
+2. **Conectar y subir**:
+```bash
+git remote add origin https://github.com/TU-USUARIO/portfolio-garavello.git
+git push -u origin main
+```
+3. **Deploy en Vercel**: https://vercel.com/new
+   - Conecta con GitHub
+   - Importa tu repositorio
+   - Configura variables de entorno (ver `.env.example`)
+   - Deploy
+
+📖 **Guía completa**: Ver [DEPLOYMENT.md](DEPLOYMENT.md)
+
+---
+
 ## Getting Started
 
 ### 1. Configurar Variables de Entorno
