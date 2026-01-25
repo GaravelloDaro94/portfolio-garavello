@@ -6,8 +6,9 @@ test.describe("Portfolio - Formulario de Contacto", () => {
 
     // Navegar a la sección de contacto
     const contactButton = page.getByRole("button", { name: /contact/i });
+    await contactButton.waitFor({ state: "visible", timeout: 10000 });
     await contactButton.click();
-    await page.waitForTimeout(500);
+    await page.waitForTimeout(1000);
   });
 
   test("debe mostrar el formulario de contacto", async ({ page }) => {
@@ -43,9 +44,10 @@ test.describe("Portfolio - Formulario de Contacto", () => {
   test("debe tener estilos correctos en el botón de envío", async ({ page }) => {
     const submitButton = page.getByRole("button", { name: /enviar mensaje/i });
 
-    // Verificar que tenga borde negro y font-bold
+    // Verificar que tenga borde y font-bold
     const buttonClasses = await submitButton.getAttribute("class");
-    expect(buttonClasses).toContain("border-black");
+    expect(buttonClasses).toContain("border-2");
+    expect(buttonClasses).toContain("border-light-text");
     expect(buttonClasses).toContain("font-bold");
   });
 });
