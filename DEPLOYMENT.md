@@ -10,6 +10,7 @@
 ## 🔧 Paso 1: Preparar el Repositorio Local
 
 Ya completado ✅:
+
 ```bash
 git config user.email "garavello.manuel@gmail.com"
 git config user.name "Darío Garavello"
@@ -96,6 +97,7 @@ NEXT_PUBLIC_UMAMI_API_URL = https://cloud.umami.is
 #### Configuración de cada variable:
 
 Para cada variable:
+
 - **Name**: El nombre de la variable (ej: `OPENAI_API_KEY`)
 - **Value**: El valor de tu `.env.local`
 - **Environment**: Marca las 3 opciones (Production, Preview, Development)
@@ -150,31 +152,37 @@ Si quieres usar un dominio personalizado (ej: `dariogaravello.com`):
 ## 🐛 Troubleshooting
 
 ### Error: "OPENAI_API_KEY is not defined"
+
 - Verifica que agregaste la variable en Vercel
 - Asegúrate de haber seleccionado "Production" environment
 - Redeploy el proyecto
 
 ### Error: Build failed
+
 - Revisa los logs en Vercel
 - Asegúrate de que `npm run build` funciona localmente
 - Verifica que todas las dependencias estén en `package.json`
 
 ### El chatbot no responde
+
 - Verifica que `OPENAI_API_KEY` esté configurada en Vercel
 - Revisa los logs de la función en Vercel Dashboard → Functions
 
 ### Emails no se envían
+
 - Verifica que `RESEND_API_KEY` esté correcta
 - Verifica el dominio en Resend Dashboard
 
 ## 📊 Monitoreo
 
 ### Ver logs en tiempo real:
+
 ```bash
 vercel logs portfolio-garavello --follow
 ```
 
 ### Ver analytics de Vercel:
+
 - Dashboard → Analytics
 - Muestra visitas, países, dispositivos, etc.
 
@@ -207,6 +215,7 @@ vercel ls
 ## 📱 Compartir tu Portfolio
 
 Una vez desplegado, comparte tu URL:
+
 - LinkedIn: Agrega en la sección de proyectos
 - GitHub: Actualiza tu perfil con el link
 - CV: Incluye la URL de tu portfolio

@@ -5,11 +5,13 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ### Opción 1: Script Automático (Recomendado)
 
 **Windows (PowerShell):**
+
 ```powershell
 .\deploy.ps1
 ```
 
 **Mac/Linux (Bash):**
+
 ```bash
 chmod +x deploy.sh
 ./deploy.sh
@@ -19,10 +21,12 @@ chmod +x deploy.sh
 
 1. **Crear repo en GitHub**: https://github.com/new
 2. **Conectar y subir**:
+
 ```bash
 git remote add origin https://github.com/TU-USUARIO/portfolio-garavello.git
 git push -u origin main
 ```
+
 3. **Deploy en Vercel**: https://vercel.com/new
    - Conecta con GitHub
    - Importa tu repositorio
