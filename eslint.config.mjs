@@ -14,17 +14,22 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Generated Emscripten runtime artifacts (do not lint generated code):
+    "public/doom/**",
   ]),
   {
     rules: {
-      "@typescript-eslint/no-unused-vars": ["warn", { 
-        argsIgnorePattern: "^_",
-        varsIgnorePattern: "^_"
-      }],
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+        },
+      ],
       "react/no-unescaped-entities": "off",
       "@next/next/no-img-element": "warn",
-    }
-  }
+    },
+  },
 ]);
 
 export default eslintConfig;

@@ -20,8 +20,8 @@
   }
 }
 
-// Global Styles
-* {
+// Global text color baseline
+body {
   color: var(--foreground);
 }
 
@@ -104,7 +104,69 @@ h6 {
   }
 }
 
+// Mobile detection (touch devices)
+@media (hover: none) and (pointer: coarse) {
+  .mobile-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    top: auto;
+    height: auto;
+    width: 100%;
+
+    & > div {
+      border-top: 2px solid;
+      border-right: none;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      width: 100%;
+
+      & p {
+        writing-mode: horizontal-tb !important;
+        text-align: center;
+      }
+    }
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: inline !important;
+  }
+}
+
+// Desktop (non-touch devices)
+@media (hover: hover) and (pointer: fine) {
+  .mobile-only {
+    display: none !important;
+  }
+
+  .desktop-only {
+    display: inline !important;
+  }
+}
+
+// Win95 / MS-DOS retro styles
+.win95-font {
+  font-family: "MS Sans Serif", "Tahoma", "Verdana", sans-serif;
+}
+
 // Animations
+@keyframes winOpen {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @keyframes gradientMove {
   0% {
     background-position: 0% 50%;

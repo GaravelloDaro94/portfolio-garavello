@@ -79,6 +79,16 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+### 4. Requisitos para Build de DOOM en Producción
+
+Si vas a usar `npm run build:prod` (compila Doom + Next.js), asegurate de tener:
+
+- Emscripten (`emmake`) disponible en `PATH`
+- `make` disponible en `PATH`
+- Un IWAD válido en `public/doom/DOOM1.WAD` o `public/doom/doom1.wad`
+
+El build normaliza automáticamente el archivo a `public/doom/doom1.wad` para evitar fallos por mayúsculas/minúsculas en Linux/CI.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.

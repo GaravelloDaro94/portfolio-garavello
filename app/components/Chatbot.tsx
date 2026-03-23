@@ -1,15 +1,13 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import { useChatbot } from "../hooks/useChatbot";
 import { useBodyScrollLock } from "../hooks/useBodyScrollLock";
-import { getChatbotColors } from "../utils/chatbotTheme";
 import { SUGGESTED_QUESTIONS } from "../constants/chatbot";
 import { ChatToggleButton } from "./chatbot/ChatToggleButton";
 import { ChatModal } from "./chatbot/ChatModal";
+import { DoomEasterEggModal } from "./chatbot/DoomEasterEggModal";
 
 export default function Chatbot() {
-  const { theme } = useTheme();
   const {
     messages,
     input,
@@ -20,15 +18,16 @@ export default function Chatbot() {
     handleSubmit,
     handleSuggestedQuestion,
     toggleChat,
+    isDoomOpen,
+    closeDoom,
   } = useChatbot();
 
-  useBodyScrollLock(isOpen);
-  const colors = getChatbotColors(theme);
+  useBodyScrollLock(isOpen || isDoomOpen);
 
   return (
     <>
       <ChatToggleButton onClick={toggleChat} />
-      
+
       {isOpen && (
         <ChatModal
           messages={messages}
@@ -38,13 +37,12 @@ export default function Chatbot() {
           messagesEndRef={messagesEndRef as React.RefObject<HTMLDivElement>}
           handleSubmit={handleSubmit}
           handleSuggestedQuestion={handleSuggestedQuestion}
-          toggleChat={toggleChat}
           suggestedQuestions={SUGGESTED_QUESTIONS}
-          colors={colors}
-          isOpen={isOpen}
           onClose={toggleChat}
         />
       )}
+
+      {isDoomOpen ? <DoomEasterEggModal isOpen={isDoomOpen} onClose={closeDoom} /> : null}
     </>
   );
 }

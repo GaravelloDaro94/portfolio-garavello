@@ -5,6 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:doom": "node scripts/build-doom.mjs",
+    "build:doom:ps": "powershell -ExecutionPolicy Bypass -File ./scripts/build-doom.ps1",
+    "setup:emsdk:ps": "powershell -ExecutionPolicy Bypass -File ./scripts/setup-emsdk.ps1",
+    "build:doom:with-setup:ps": "npm run setup:emsdk:ps && npm run build:doom:ps",
+    "build:prod": "npm run build:doom && npm run build",
+    "build:prod:ps": "powershell -ExecutionPolicy Bypass -File ./scripts/build-production.ps1",
     "start": "next start",
     "lint": "eslint",
     "test": "jest --testPathIgnorePatterns=tests/",

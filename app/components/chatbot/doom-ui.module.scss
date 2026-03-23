@@ -1,0 +1,32 @@
+.doomUiRoot {
+  font-family: "MS Sans Serif", "Tahoma", "Verdana", sans-serif;
+  color: #d9d9d9;
+}
+
+.doomUiRoot h1,
+.doomUiRoot h2,
+.doomUiRoot h3,
+.doomUiRoot h4,
+.doomUiRoot h5,
+.doomUiRoot h6,
+.doomUiRoot p,
+.doomUiRoot span,
+.doomUiRoot div,
+.doomUiRoot button,
+.doomUiRoot input,
+.doomUiRoot select,
+.doomUiRoot pre {
+  font-family: inherit;
+}
+
+.pixelated {
+  image-rendering: pixelated;
+}
+
+.commandHintCyan {
+  color: #00ffff;
+}
+
+.commandHintYellow {
+  color: #ffff00;
+}

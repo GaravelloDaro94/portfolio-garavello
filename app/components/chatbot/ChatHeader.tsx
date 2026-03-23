@@ -1,11 +1,8 @@
 import { ChatHeaderProps } from "../../models";
 
-export function ChatHeader({ onClose, headerStyle }: Readonly<ChatHeaderProps>) {
+export function ChatHeader({ onClose }: Readonly<ChatHeaderProps>) {
   return (
-    <div 
-      className="flex-shrink-0 flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b-2"
-      style={headerStyle}
-    >
+    <div className="flex-shrink-0 flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b-2 bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-700">
       <div className="flex items-center gap-2 sm:gap-3">
         <span className="text-xl sm:text-2xl">🤖</span>
         <div>

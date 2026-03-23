@@ -14,32 +14,21 @@ export function ChatModal({
   handleSuggestedQuestion,
   onClose,
   suggestedQuestions,
-  colors,
 }: Readonly<ChatModalProps>) {
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-      <div
-        className="w-full max-w-3xl max-h-[90vh] flex flex-col rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200"
-        style={colors.chatWindow}
-      >
-        <ChatHeader onClose={onClose} headerStyle={colors.header} />
+      <div className="w-full max-w-3xl max-h-[90vh] flex flex-col rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 bg-white dark:bg-gray-800 dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]">
+        <ChatHeader onClose={onClose} />
 
         <ChatMessages
           messages={messages}
           isLoading={isLoading}
           messagesEndRef={messagesEndRef}
-          messagesStyle={colors.messages}
-          userMessageStyle={colors.userMessage}
-          assistantMessageStyle={colors.assistantMessage}
-          loadingBackgroundColor={colors.loading.backgroundColor}
-          loadingDotColor={colors.loading.dotColor}
         />
 
         <SuggestedQuestions
           questions={suggestedQuestions}
           onQuestionClick={handleSuggestedQuestion}
-          headerStyle={colors.suggestedQuestions.header}
-          buttonStyle={colors.suggestedQuestions.button}
         />
 
         <ChatInput
@@ -47,9 +36,6 @@ export function ChatModal({
           onChange={setInput}
           onSubmit={handleSubmit}
           isLoading={isLoading}
-          headerStyle={colors.input.header}
-          inputStyle={colors.input.field}
-          submitButtonStyle={colors.input.submitButton}
         />
       </div>
     </div>

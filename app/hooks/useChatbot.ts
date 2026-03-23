@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { toast } from "sonner";
 import { Message } from "../models";
+import { DOOM_EASTER_EGG_REPLY } from "../constants/doom";
+import { isDoomEasterEggTrigger } from "../utils/doomEasterEgg";
 
 const INITIAL_MESSAGE: Message = {
   role: "assistant",
@@ -13,7 +15,9 @@ export function useChatbot() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isDoomOpen, setIsDoomOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const doomOpenTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -25,6 +29,14 @@ export function useChatbot() {
     }
   }, [messages.length, isOpen]);
 
+  useEffect(() => {
+    return () => {
+      if (doomOpenTimeoutRef.current) {
+        clearTimeout(doomOpenTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
@@ -32,6 +44,25 @@ export function useChatbot() {
     const userMessage: Message = { role: "user", content: input };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
+
+    if (isDoomEasterEggTrigger(userMessage.content)) {
+      const easterEggMessage: Message = {
+        role: "assistant",
+        content: DOOM_EASTER_EGG_REPLY,
+      };
+      setMessages((prev) => [...prev, easterEggMessage]);
+
+      if (doomOpenTimeoutRef.current) {
+        clearTimeout(doomOpenTimeoutRef.current);
+      }
+
+      doomOpenTimeoutRef.current = setTimeout(() => {
+        setIsOpen(false);
+        setIsDoomOpen(true);
+      }, 1500);
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -90,6 +121,14 @@ export function useChatbot() {
     setIsOpen((prev) => !prev);
   };
 
+  const closeDoom = () => {
+    if (doomOpenTimeoutRef.current) {
+      clearTimeout(doomOpenTimeoutRef.current);
+      doomOpenTimeoutRef.current = null;
+    }
+    setIsDoomOpen(false);
+  };
+
   return {
     messages,
     input,
@@ -100,5 +139,7 @@ export function useChatbot() {
     handleSubmit,
     handleSuggestedQuestion,
     toggleChat,
+    isDoomOpen,
+    closeDoom,
   };
 }

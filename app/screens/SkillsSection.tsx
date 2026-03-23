@@ -29,10 +29,11 @@ export default function SkillsSection() {
           text="Habilidades" 
           className={`text-2xl sm:text-3xl md:text-4xl font-bold ${TEXT_PRIMARY} mb-6 sm:mb-8`}
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+        {/* Scroll horizontal en móvil, grid en desktop */}
+        <div className="flex md:grid md:grid-cols-2 gap-6 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none pb-4 md:pb-0 -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 scrollbar-hide">
           {skillCategories.map((category, index) => (
             <FadeInCard key={category.title} delay={index * 100}>
-              <div>
+              <div className="min-w-[280px] md:min-w-0 snap-center flex-shrink-0">
               <h3 className={`text-lg sm:text-xl font-semibold ${TEXT_PRIMARY} mb-2 sm:mb-3`}>
                 {category.title}
               </h3>

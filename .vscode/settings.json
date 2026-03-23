@@ -4,12 +4,7 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "prettier.requireConfig": false,
   "prettier.useEditorConfig": false,
   "[typescript]": {
@@ -43,5 +38,9 @@
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
-  }
+  },
+  "files.associations": {
+    "public/doom/*.js": "plaintext"
+  },
+  "sonarlint.analysisExcludesStandalone": ["public/doom/**", "**/public/doom/**"]
 }

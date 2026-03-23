@@ -4,5 +4,5 @@ export * from "./api.types";
 export * from "./navigation.types";
 export * from "./component.types";
 export * from "./contact.types";
-export * from "./theme.types";
+export * from "./doom.types";
 export * from "./chatbot-components.types";

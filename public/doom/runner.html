@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DOOM Runtime Runner</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #000;
+      }
+
+      #doom-canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+        image-rendering: pixelated;
+        outline: none;
+        background: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="doom-canvas" width="640" height="400" tabindex="0"></canvas>
+    <script>
+      (function () {
+        var runtimeStarted = false;
+
+        function send(type, payload) {
+          window.parent.postMessage(
+            Object.assign({ source: "doom-runner", type: type }, payload || {}),
+            window.location.origin
+          );
+        }
+
+        function log(message) {
+          send("log", { message: String(message) });
+        }
+
+        var canvas = document.getElementById("doom-canvas");
+
+        // Auto-focus al cargar para capturar teclado sin necesitar click.
+        canvas.focus();
+
+        canvas.addEventListener("click", function () {
+          canvas.focus();
+          if (
+            typeof canvas.requestPointerLock === "function" &&
+            document.pointerLockElement !== canvas
+          ) {
+            canvas.requestPointerLock();
+            log("Pointer lock solicitado. Usa ESC para liberar el mouse.");
+          }
+        });
+
+        window.addEventListener("message", function (event) {
+          if (event.origin !== window.location.origin) {
+            return;
+          }
+
+          var data = event.data || {};
+          if (data.source !== "doom-host" || data.type !== "start") {
+            return;
+          }
+
+          if (runtimeStarted) {
+            send("error", { error: "El runtime ya fue inicializado en este sandbox." });
+            return;
+          }
+
+          runtimeStarted = true;
+
+          try {
+            var wadName = typeof data.wadName === "string" ? data.wadName : "freedoom1.wad";
+            var wadPath = "/" + wadName;
+            var wadBuffer = data.wadBytes;
+            if (!(wadBuffer instanceof ArrayBuffer)) {
+              throw new TypeError("No se recibio un ArrayBuffer valido para el WAD");
+            }
+
+            var wadBytes = new Uint8Array(wadBuffer);
+            if (wadBytes.byteLength === 0) {
+              throw new TypeError("El WAD recibido esta vacio");
+            }
+
+            log("Inicializando runtime en sandbox");
+
+            window.Module = {
+              canvas: canvas,
+              arguments: ["-iwad", wadPath, "-warp", "1", "1"],
+              locateFile: function (path) {
+                return "/doom/" + path;
+              },
+              preRun: [
+                function () {
+                  var activeModule = window.Module;
+                  if (!activeModule) {
+                    throw new TypeError("Module no disponible en preRun");
+                  }
+
+                  if (typeof activeModule.FS_unlink === "function") {
+                    try {
+                      activeModule.FS_unlink(wadPath);
+                    } catch (_unused) {
+                      // Ignora si no existia.
+                    }
+                  }
+
+                  if (typeof activeModule.FS_writeFile === "function") {
+                    activeModule.FS_writeFile(wadPath, wadBytes);
+                    return;
+                  }
+
+                  if (typeof activeModule.FS_createDataFile === "function") {
+                    activeModule.FS_createDataFile("/", wadName, wadBytes, true, true, true);
+                    return;
+                  }
+
+                  throw new TypeError("FS_writeFile/FS_createDataFile no disponible");
+                },
+              ],
+              print: function () {
+                var line = Array.prototype.map.call(arguments, String).join(" ").trim();
+                if (line) {
+                  log("OUT: " + line);
+                }
+              },
+              printErr: function () {
+                var line = Array.prototype.map.call(arguments, String).join(" ").trim();
+                if (line) {
+                  log("ERR: " + line);
+                }
+              },
+              onRuntimeInitialized: function () {
+                send("ready");
+              },
+              onAbort: function (reason) {
+                send("error", { error: String(reason) });
+              },
+              onExit: function (status) {
+                send("exit", { status: Number(status) || 0 });
+              },
+            };
+
+            var script = document.createElement("script");
+            script.src = "/doom/doom.js";
+            script.async = false;
+            script.onerror = function () {
+              send("error", { error: "No se pudo cargar /doom/doom.js" });
+            };
+            document.body.appendChild(script);
+          } catch (error) {
+            send("error", {
+              error: error && typeof error.message === "string" ? error.message : String(error),
+            });
+          }
+        });
+
+        send("log", { message: "Sandbox listo" });
+      })();
+    </script>
+  </body>
+</html>
