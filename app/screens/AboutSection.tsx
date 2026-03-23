@@ -16,8 +16,8 @@ export default function AboutSection() {
         />
 
         <FadeInCard>
-          <div className={`rounded-2xl p-4 sm:p-6 transition-all ${GLASSMORPHISM_BASE} shadow-lg shadow-gray-300/50 dark:shadow-black/50`}>
-            <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-light-text dark:text-gray-300 mb-4 sm:mb-6">
+          <div className={`rounded-2xl p-4 sm:p-6 transition-all ${GLASSMORPHISM_BASE} bg-white/70 dark:bg-dark-medium/60 shadow-lg shadow-gray-300/50 dark:shadow-black/50`}>
+            <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-gray-700 dark:text-gray-200 mb-4 sm:mb-6">
               <p>
                 Soy una persona apasionada por crear soluciones eficientes y elegantes. Para mí,
                 programar es transformar ideas en proyectos útiles y bien diseñados.
@@ -43,7 +43,7 @@ export default function AboutSection() {
 
             {/* Chatbot */}
             <div className={`mt-4 sm:mt-6 pt-4 sm:pt-6 ${BORDER_BASE} border-t`}>
-              <p className="text-sm sm:text-base text-light-text dark:text-gray-400 mb-3 sm:mb-4">
+              <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 mb-3 sm:mb-4">
                 ¿Tienes preguntas sobre mi experiencia? Chatea con mi asistente virtual:
               </p>
               <Chatbot />
