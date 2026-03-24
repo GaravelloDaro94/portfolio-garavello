@@ -13,6 +13,7 @@ const config: Config = {
     extend: {
       colors: {
         // Colores personalizados para el portfolio
+        "light-text": "#1F2937",
         "blue-pastel": "#A7C7E7",
         mint: "#B8E0D2",
         pink: "#F7C8E0",
