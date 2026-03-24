@@ -52,7 +52,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base bg-blue-pastel dark:bg-dark-blue-gray text-white dark:text-dark-smoke rounded-lg font-bold hover:bg-yellow hover:text-light-text dark:hover:bg-dark-blue-pastel transition-colors disabled:opacity-50 disabled:cursor-not-allowed border-2 border-light-text dark:border-dark-smoke"
+        className="w-full px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base bg-blue-pastel dark:bg-dark-blue-gray text-light-text dark:text-dark-smoke rounded-lg font-bold hover:bg-yellow hover:text-light-text dark:hover:bg-dark-blue-pastel transition-colors disabled:opacity-50 disabled:cursor-not-allowed border-2 border-light-text dark:border-dark-smoke"
       >
         {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
       </button>

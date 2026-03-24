@@ -118,7 +118,7 @@ export default function DynamicBackground() {
       {isDark && (
         <canvas
           id="particles-canvas"
-          className="fixed inset-0 -z-10"
+          className="fixed inset-0 z-0 pointer-events-none"
           style={{ background: '#1C1C1C' }}
         />
       )}
