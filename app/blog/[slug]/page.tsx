@@ -30,7 +30,7 @@ export default async function PostPage({ params }: { readonly params: Promise<{ 
         {/* Back Button */}
         <Link 
           href="/blog"
-          className="inline-flex items-center gap-2 text-pink dark:text-dark-blue-pastel hover:text-light-text dark:hover:text-dark-smoke mb-8 transition-colors"
+          className="inline-flex items-center gap-2 text-dark-charcoal dark:text-dark-blue-pastel hover:text-light-text dark:hover:text-dark-smoke mb-8 transition-colors"
         >
           ← Volver al blog
         </Link>
@@ -123,12 +123,12 @@ export default async function PostPage({ params }: { readonly params: Promise<{ 
           <div className="blog-content prose prose-lg dark:prose-invert max-w-none
             prose-headings:text-light-text dark:prose-headings:text-dark-smoke
             prose-p:text-gray-700 dark:prose-p:text-gray-300
-            prose-a:text-pink dark:prose-a:text-dark-blue-pastel prose-a:no-underline hover:prose-a:text-light-text dark:hover:prose-a:text-dark-smoke
+            prose-a:text-dark-charcoal dark:prose-a:text-dark-blue-pastel prose-a:no-underline hover:prose-a:text-light-text dark:hover:prose-a:text-dark-smoke
             prose-strong:text-light-text dark:prose-strong:text-dark-smoke prose-strong:font-bold
             prose-ul:text-gray-700 dark:prose-ul:text-gray-300
             prose-ol:text-gray-700 dark:prose-ol:text-gray-300
-            prose-li:marker:text-pink dark:prose-li:marker:text-dark-blue-pastel
-            prose-blockquote:border-l-pink dark:prose-blockquote:border-l-dark-blue-pastel prose-blockquote:bg-mint/10 dark:prose-blockquote:bg-dark-medium/50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg
+            prose-li:marker:text-dark-charcoal dark:prose-li:marker:text-dark-blue-pastel
+            prose-blockquote:border-l-dark-charcoal dark:prose-blockquote:border-l-dark-blue-pastel prose-blockquote:bg-mint/10 dark:prose-blockquote:bg-dark-medium/50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg
             prose-img:rounded-xl prose-img:border-2 prose-img:border-light-border dark:prose-img:border-dark-medium
           ">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>

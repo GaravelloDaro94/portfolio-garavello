@@ -35,7 +35,7 @@ export default function Header() {
             scrollToSection("home");
             setMobileMenuOpen(false);
           }}
-          className="text-lg sm:text-xl font-bold text-light-text dark:text-dark-smoke hover:text-pink dark:hover:text-dark-blue-pastel transition-colors border-2 border-blue-pastel dark:border-dark-blue-pastel rounded-lg px-2 py-1 sm:px-3 sm:py-1"
+          className="text-lg sm:text-xl font-bold text-light-text dark:text-dark-smoke hover:text-dark-charcoal dark:hover:text-dark-blue-pastel transition-colors border-2 border-blue-pastel dark:border-dark-blue-pastel rounded-lg px-2 py-1 sm:px-3 sm:py-1"
         >
           DG
         </button>
@@ -58,7 +58,7 @@ export default function Header() {
               >
                 <button
                   onClick={() => scrollToSection(item)}
-                  className="text-sm font-medium text-light-text dark:text-gray-300 hover:text-pink dark:hover:text-dark-blue-pastel transition-colors capitalize whitespace-nowrap"
+                  className="text-sm font-medium text-light-text dark:text-gray-300 hover:text-dark-charcoal dark:hover:text-dark-blue-pastel transition-colors capitalize whitespace-nowrap"
                 >
                   {item}
                 </button>
@@ -76,7 +76,7 @@ export default function Header() {
             >
               <Link
                 href="/blog"
-                className="text-sm font-medium text-light-text dark:text-gray-300 hover:text-pink dark:hover:text-dark-blue-pastel transition-colors whitespace-nowrap"
+                className="text-sm font-medium text-light-text dark:text-gray-300 hover:text-dark-charcoal dark:hover:text-dark-blue-pastel transition-colors whitespace-nowrap"
               >
                 Blog
               </Link>
@@ -99,7 +99,7 @@ export default function Header() {
           `}} />
           <button
             onClick={() => setDesktopMenuOpen(!desktopMenuOpen)}
-            className={`chevron-btn px-3 py-2 rounded-full text-light-text dark:text-dark-smoke hover:text-pink dark:hover:text-dark-blue-pastel transition-all duration-500 hover:bg-white/30 dark:hover:bg-dark-medium/40 hover:backdrop-blur-sm hover:shadow-lg hover:shadow-yellow/40 dark:hover:shadow-dark-blue-pastel/40 ${
+            className={`chevron-btn px-3 py-2 rounded-full text-light-text dark:text-dark-smoke hover:text-dark-charcoal dark:hover:text-dark-blue-pastel transition-all duration-500 hover:bg-light-text/10 dark:hover:bg-dark-medium/40 hover:backdrop-blur-sm hover:shadow-lg hover:shadow-yellow/40 dark:hover:shadow-dark-blue-pastel/40 ${
               desktopMenuOpen ? '-translate-x-[420px] menu-open' : 'translate-x-0'
             }`}
             aria-label="Toggle navigation menu"
@@ -125,7 +125,7 @@ export default function Header() {
           <ThemeToggle />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-light-text dark:text-dark-smoke hover:text-pink dark:hover:text-dark-blue-pastel transition-colors"
+            className="p-2 text-light-text dark:text-dark-smoke hover:text-dark-charcoal dark:hover:text-dark-blue-pastel transition-colors"
             aria-label="Toggle menu"
           >
             <svg
@@ -157,7 +157,7 @@ export default function Header() {
                       scrollToSection(item);
                       setMobileMenuOpen(false);
                     }}
-                    className="w-full text-left px-6 py-3 text-base font-medium text-light-text dark:text-gray-300 hover:bg-yellow/10 dark:hover:bg-dark-blue-pastel/10 hover:text-pink dark:hover:text-dark-blue-pastel transition-colors capitalize"
+                    className="w-full text-left px-6 py-3 text-base font-medium text-light-text dark:text-gray-300 hover:bg-light-text/10 dark:hover:bg-dark-blue-pastel/10 hover:text-dark-charcoal dark:hover:text-dark-blue-pastel transition-colors capitalize"
                   >
                     {item}
                   </button>
@@ -167,7 +167,7 @@ export default function Header() {
                 <Link
                   href="/blog"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block w-full text-left px-6 py-3 text-base font-medium text-light-text dark:text-gray-300 hover:bg-yellow/10 dark:hover:bg-dark-blue-pastel/10 hover:text-pink dark:hover:text-dark-blue-pastel transition-colors"
+                  className="block w-full text-left px-6 py-3 text-base font-medium text-light-text dark:text-gray-300 hover:bg-light-text/10 dark:hover:bg-dark-blue-pastel/10 hover:text-dark-charcoal dark:hover:text-dark-blue-pastel transition-colors"
                 >
                   Blog
                 </Link>

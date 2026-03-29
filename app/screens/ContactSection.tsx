@@ -54,7 +54,7 @@ export default function ContactSection() {
             </a>
             <Link
               href="/blog"
-              className={`${BUTTON_PRIMARY} hover:text-light-text dark:hover:text-white flex items-center gap-2`}
+              className={`${BUTTON_PRIMARY} hover:text-dark-charcoal dark:hover:text-white flex items-center gap-2`}
               aria-label="Blog"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -21,8 +21,8 @@ export const HOVER_BG_SOLID = "hover:bg-yellow dark:hover:bg-dark-blue-pastel";
 export const TEXT_PRIMARY = "text-light-text dark:text-dark-smoke";
 export const TEXT_SECONDARY = "text-gray-600 dark:text-gray-300";
 export const TEXT_MUTED = "text-gray-500 dark:text-gray-400";
-export const TEXT_ACCENT = "text-pink dark:text-dark-blue-pastel";
-export const TEXT_HOVER_ACCENT = "hover:text-pink dark:hover:text-dark-blue-pastel";
+export const TEXT_ACCENT = "text-dark-charcoal dark:text-dark-blue-pastel";
+export const TEXT_HOVER_ACCENT = "hover:text-dark-charcoal dark:hover:text-dark-blue-pastel";
 
 // Input/Form styles
 export const INPUT_BASE = `w-full rounded-lg ${GLASSMORPHISM_BASE} ${TEXT_PRIMARY} focus:outline-none focus:ring-2 focus:ring-blue-pastel dark:focus:ring-dark-blue-pastel disabled:opacity-50 ${SHADOW_BASE} focus:shadow-lg`;

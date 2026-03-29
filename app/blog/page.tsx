@@ -16,7 +16,7 @@ export default function BlogPage() {
         <div className="mb-12">
           <Link 
             href="/"
-            className="inline-flex items-center gap-2 text-pink dark:text-dark-blue-pastel hover:text-light-text dark:hover:text-dark-smoke mb-6 transition-colors"
+            className="inline-flex items-center gap-2 text-dark-charcoal dark:text-dark-blue-pastel hover:text-light-text dark:hover:text-dark-smoke mb-6 transition-colors"
           >
             ← Volver al inicio
           </Link>
@@ -60,7 +60,7 @@ export default function BlogPage() {
                       </span>
                     )}
                   </div>
-                  <h2 className="text-xl sm:text-2xl font-bold text-light-text dark:text-dark-smoke mb-3 group-hover:text-pink dark:group-hover:text-dark-blue-pastel transition-colors">
+                  <h2 className="text-xl sm:text-2xl font-bold text-light-text dark:text-dark-smoke mb-3 group-hover:text-dark-charcoal dark:group-hover:text-dark-blue-pastel transition-colors">
                     {post.title}
                   </h2>
                   <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">
