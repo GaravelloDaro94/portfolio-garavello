@@ -59,7 +59,7 @@ export default function Home() {
       <DynamicBackground />
       <Header />
       <Footer />
-      <main className="snap-y snap-mandatory overflow-y-scroll h-screen relative z-10">
+      <main className="snap-y snap-mandatory overflow-y-scroll h-screen relative z-10 scrollbar-y-hide-mobile">
         {/* Main Section - Scroll vertical normal */}
         <section className="snap-start min-h-screen">
           <MainSection />

@@ -33,7 +33,7 @@ export default function ProjectsSection() {
         // URL del proyecto en expo.dev (página con QR oficial para Expo Go)
         expoGo: "https://expo.dev/@dario.garavello/to-do-getter",
         // Completar con la URL del build APK generado por EAS (pnpm build:apk)
-        apk: "https://expo.dev/artifacts/eas/hjM9S7aVuekYCjERqYVA1s.apk"
+        apk: "https://expo.dev/artifacts/eas/eTh47NcBEEApJtLZMasQdm.apk"
       }
     },
     {
@@ -109,18 +109,19 @@ export default function ProjectsSection() {
   };
 
   return (
-    <section id="projects" className="min-h-screen flex items-center justify-center px-4 sm:px-6 pl-12 sm:pl-16 py-12 sm:py-20">
+    <section id="projects" className="h-full flex items-center justify-center px-4 sm:px-6 pl-12 sm:pl-16 py-8 sm:py-10 md:py-20">
       <div className="max-w-6xl w-full">
         <TypewriterTitle 
           text="Proyectos Destacados" 
           className={`text-2xl sm:text-3xl md:text-4xl font-bold ${TEXT_PRIMARY} mb-8 sm:mb-8`}
         />
         {/* Scroll horizontal en móvil, grid en desktop */}
-        <div className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-x-visible snap-x snap-mandatory md:snap-none pb-4 md:pb-0 -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 scrollbar-hide">
-          {projects.map((project, index) => (
-            <FadeInCard key={project.id} delay={index * 100}>
+        <div className="overflow-x-auto overflow-y-hidden md:overflow-visible pb-4 md:pb-0 -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 scrollbar-hide">
+          <div className="flex md:grid md:grid-cols-3 gap-6 snap-x snap-mandatory md:snap-none md:w-full">
+            {projects.map((project, index) => (
+              <FadeInCard key={project.id} delay={index * 100}>
               <div 
-                className={`group rounded-2xl overflow-hidden hover:bg-yellow/10 dark:hover:bg-dark-blue-pastel/10 transition-all ${GLASSMORPHISM_BASE} ${SHADOW_BASE} hover:shadow-xl hover:shadow-yellow/30 dark:hover:shadow-dark-blue-pastel/30 min-w-[280px] md:min-w-0 snap-center flex-shrink-0`}
+                className={`group rounded-2xl overflow-hidden hover:bg-yellow/10 dark:hover:bg-dark-blue-pastel/10 transition-all ${GLASSMORPHISM_BASE} ${SHADOW_BASE} hover:shadow-xl hover:shadow-yellow/30 dark:hover:shadow-dark-blue-pastel/30 w-[84vw] min-w-[280px] max-w-[360px] md:w-auto md:min-w-0 md:max-w-none snap-center flex-shrink-0`}
               >
                 {/* Imagen del proyecto */}
                 <div className="w-full h-48 flex-shrink-0 bg-gradient-to-br from-mint/30 to-yellow/30 dark:from-dark-blue-gray/50 dark:to-dark-blue-pastel/50 flex items-center justify-center relative overflow-hidden">
@@ -206,8 +207,9 @@ export default function ProjectsSection() {
                   )}
                 </div>
               </div>
-            </FadeInCard>
-          ))}
+              </FadeInCard>
+            ))}
+          </div>
         </div>
       </div>
     </section>

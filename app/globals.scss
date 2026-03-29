@@ -102,6 +102,20 @@ h6 {
   }
 }
 
+// Hide vertical scrollbar on mobile while preserving scroll
+@media (max-width: 767px) {
+  .scrollbar-y-hide-mobile {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+      display: none;
+    }
+  }
+}
+
 // Mobile detection (touch devices)
 // Win95 / MS-DOS retro styles
 .win95-font {
