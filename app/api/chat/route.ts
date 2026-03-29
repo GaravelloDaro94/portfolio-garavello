@@ -19,10 +19,9 @@ const PORTFOLIO_INFO = {
     "Tailwind CSS",
   ],
   proyectos: [
-    "E-commerce Platform: Plataforma completa con carrito de compras y procesamiento de pagos",
-    "Task Management App: Aplicación colaborativa con funcionalidades en tiempo real",
-    "Analytics Dashboard: Dashboard interactivo de análisis de datos",
-    "Social Network API: API RESTful con autenticación JWT",
+    "E-commerce Livia Accesorios: Plataforma de comercio electrónico completa con carrito de compras, procesamiento de pagos y panel de administración.",
+    "Todo Togetter app: App mobile con Expo y React Native para gestión colaborativa de tareas. Incluye autenticación, contactos, asignación en tiempo real, recordatorios y sincronización con backend propio.",
+    "Movie Theater: Un proyecto de streaming de películas con autenticación, sistema de filtros, acceso premium por pagos por stripe o mercado pago.",
   ],
   fortalezas: [
     "Código limpio y mantenible",
@@ -96,10 +95,9 @@ Información sobre Darío Garavello:
 - Es hábil en trabajo en equipo, resolución de problemas y comunicación efectiva
 
 Proyectos destacados:
-1. E-commerce Platform: Plataforma completa con carrito de compras y procesamiento de pagos
-2. Task Management App: Aplicación colaborativa con funcionalidades en tiempo real
-3. Analytics Dashboard: Dashboard interactivo de análisis de datos
-4. Social Network API: API RESTful con autenticación JWT
+1. E-commerce Livia Accesorios: Plataforma de comercio electrónico completa con carrito de compras, procesamiento de pagos y panel de administración.
+2. Todo Togetter app: App mobile con Expo y React Native para gestión colaborativa de tareas. Incluye autenticación, contactos, asignación en tiempo real, recordatorios y sincronización con backend propio.
+3. Movie Theater: Un proyecto de streaming de películas con autenticación, sistema de filtros, acceso premium por pagos por stripe o mercado pago.
 
 Responde de manera concisa, profesional pero amigable. Si te preguntan algo que no sabes, indica que pueden contactar directamente con Darío para más detalles específicos.
 No inventes información que no esté aquí proporcionada.`;

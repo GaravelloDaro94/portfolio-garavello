@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import QRCode from "react-qr-code";
 import TypewriterTitle from "../components/animations/TypewriterTitle";
 import FadeInCard from "../components/animations/FadeInCard";
 import { TEXT_PRIMARY, GLASSMORPHISM_BASE, SHADOW_BASE, TEXT_ACCENT } from "../utils/styles";
@@ -22,12 +23,18 @@ export default function ProjectsSection() {
     },
     {
       id: "task-management-app",
-      title: "Task Management App",
-      description: "Aplicación de gestión de tareas colaborativa con funcionalidades en tiempo real y sistema de notificaciones.",
-      tags: ["React Native", "TypeScript", "MongoDB", "Websocket"],
+      title: "Todo Togetter app",
+      description: "App mobile con Expo y React Native para gestión colaborativa de tareas. Incluye autenticación, contactos, asignación en tiempo real, recordatorios y sincronización con backend propio.",
+      tags: ["Expo", "React Native", "Zustand", "SQLite", "Socket.IO", "Prisma", "Railway"],
       demoUrl: "",
       repoUrls: [],
-      imageUrl: null
+      imageUrl: null,
+      mobileLinks: {
+        // URL del proyecto en expo.dev (página con QR oficial para Expo Go)
+        expoGo: "https://expo.dev/@dario.garavello/to-do-getter",
+        // Completar con la URL del build APK generado por EAS (pnpm build:apk)
+        apk: "https://expo.dev/artifacts/eas/hjM9S7aVuekYCjERqYVA1s.apk"
+      }
     },
     {
       id: "movie-theater",
@@ -42,6 +49,64 @@ export default function ProjectsSection() {
       imageUrl: movieTheaterImage
     }
   ];
+
+  const renderProjectMedia = (project: (typeof projects)[number]) => {
+    if (project.imageUrl) {
+      return (
+        <Image
+          src={project.imageUrl}
+          alt={project.title}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1260px) 33vw, 400px"
+        />
+      );
+    }
+    if ("mobileLinks" in project && project.mobileLinks) {
+      const { expoGo, apk } = project.mobileLinks;
+      return (
+        <div className="flex gap-5 items-center justify-center w-full px-4">
+          {/* QR Expo Go */}
+          <div className="flex flex-col items-center gap-1.5">
+            <div className="bg-white p-1.5 rounded-lg shadow-sm">
+              <QRCode value={expoGo} size={72} />
+            </div>
+            <span className="text-[11px] font-medium text-light-text dark:text-gray-400 text-center leading-tight">
+              Demo<br />Expo Go
+            </span>
+          </div>
+          {/* Separador */}
+          <div className="h-20 w-px bg-light-text/20 dark:bg-gray-600" />
+          {/* QR APK o placeholder */}
+          <div className="flex flex-col items-center gap-1.5">
+            {apk ? (
+              <>
+                <div className="bg-white p-1.5 rounded-lg shadow-sm">
+                  <QRCode value={apk} size={72} />
+                </div>
+                <span className="text-[11px] font-medium text-light-text dark:text-gray-400 text-center leading-tight">
+                  Descargar<br />APK
+                </span>
+              </>
+            ) : (
+              <>
+                <div className="w-[84px] h-[84px] bg-white/30 dark:bg-white/10 rounded-lg border-2 border-dashed border-light-text/30 dark:border-gray-500 flex flex-col items-center justify-center gap-1">
+                  <svg className="w-6 h-6 text-light-text/40 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  <span className="text-[10px] text-light-text/40 dark:text-gray-500 text-center px-1">APK<br />próximo</span>
+                </div>
+                <span className="text-[11px] text-light-text/50 dark:text-gray-500 text-center leading-tight">
+                  Próximamente
+                </span>
+              </>
+            )}
+          </div>
+        </div>
+      );
+    }
+    return <span className="text-light-text/50 dark:text-gray-500 text-sm">Imagen del proyecto</span>;
+  };
 
   return (
     <section id="projects" className="min-h-screen flex items-center justify-center px-4 sm:px-6 pl-12 sm:pl-16 py-12 sm:py-20">
@@ -59,17 +124,7 @@ export default function ProjectsSection() {
               >
                 {/* Imagen del proyecto */}
                 <div className="w-full h-48 flex-shrink-0 bg-gradient-to-br from-mint/30 to-yellow/30 dark:from-dark-blue-gray/50 dark:to-dark-blue-pastel/50 flex items-center justify-center relative overflow-hidden">
-                  {project.imageUrl ? (
-                    <Image
-                      src={project.imageUrl}
-                      alt={project.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1260px) 33vw, 400px"
-                    />
-                  ) : (
-                    <span className="text-light-text/50 dark:text-gray-500 text-sm">Imagen del proyecto</span>
-                  )}
+                  {renderProjectMedia(project)}
                 </div>
                 
                 {/* Contenido */}
@@ -92,7 +147,7 @@ export default function ProjectsSection() {
                   </div>
                   
                   {/* Links section */}
-                  {(project.demoUrl || project.repoUrls.length > 0) && (
+                  {(project.demoUrl || project.repoUrls.length > 0 || ("mobileLinks" in project && project.mobileLinks)) && (
                     <div className="flex flex-wrap gap-2 pt-3 border-t border-light-text/10 dark:border-gray-700 mt-3">
                       {project.demoUrl && (
                         <a
@@ -121,6 +176,32 @@ export default function ProjectsSection() {
                           {repo.label}
                         </a>
                       ))}
+                      {"mobileLinks" in project && project.mobileLinks?.expoGo && (
+                        <a
+                          href={project.mobileLinks.expoGo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${TEXT_ACCENT} hover:bg-yellow/20 dark:hover:bg-dark-blue-pastel/20`}
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                          </svg>
+                          Expo Go
+                        </a>
+                      )}
+                      {"mobileLinks" in project && project.mobileLinks?.apk && (
+                        <a
+                          href={project.mobileLinks.apk}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${TEXT_ACCENT} hover:bg-yellow/20 dark:hover:bg-dark-blue-pastel/20`}
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                          </svg>
+                          Descargar APK
+                        </a>
+                      )}
                     </div>
                   )}
                 </div>
