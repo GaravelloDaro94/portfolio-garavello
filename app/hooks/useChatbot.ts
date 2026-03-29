@@ -46,6 +46,18 @@ export function useChatbot() {
     setInput("");
 
     if (isDoomEasterEggTrigger(userMessage.content)) {
+      const isMobile = /android|iphone|ipad|ipod/i.test(navigator.userAgent);
+      if (isMobile) {
+        const mobileMessage: Message = {
+          role: "assistant",
+          content:
+            "Este easter egg no está disponible en dispositivos móviles. 🖥️ Probalo desde una PC.",
+        };
+        setMessages((prev) => [...prev, mobileMessage]);
+        setIsLoading(false);
+        return;
+      }
+
       const easterEggMessage: Message = {
         role: "assistant",
         content: DOOM_EASTER_EGG_REPLY,
