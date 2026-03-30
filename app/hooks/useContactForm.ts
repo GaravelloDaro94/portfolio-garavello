@@ -3,8 +3,10 @@
 import { useState, FormEvent } from "react";
 import { toast } from "sonner";
 import { ContactFormData, ContactFormStatus } from "../models";
+import { useI18n } from "./useI18n";
 
 export function useContactForm() {
+  const { t } = useI18n();
   const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
@@ -23,28 +25,28 @@ export function useContactForm() {
 
   const validateForm = (): boolean => {
     if (!formData.name.trim()) {
-      toast.error("Por favor, ingresa tu nombre");
+      toast.error(t.form.validation.nameRequired);
       return false;
     }
 
     if (!formData.email.trim()) {
-      toast.error("Por favor, ingresa tu email");
+      toast.error(t.form.validation.emailRequired);
       return false;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
-      toast.error("Por favor, ingresa un email válido");
+      toast.error(t.form.validation.emailInvalid);
       return false;
     }
 
     if (!formData.message.trim()) {
-      toast.error("Por favor, escribe un mensaje");
+      toast.error(t.form.validation.messageRequired);
       return false;
     }
 
     if (formData.message.length < 10) {
-      toast.error("El mensaje debe tener al menos 10 caracteres");
+      toast.error(t.form.validation.messageMinLength);
       return false;
     }
 
@@ -53,11 +55,11 @@ export function useContactForm() {
 
   const getErrorMessage = (response: Response, data: { error?: string }): string => {
     const errorMessages: Record<number, string> = {
-      400: data.error || "Datos inválidos. Verifica los campos",
-      500: "Error del servidor. Intenta de nuevo más tarde",
-      429: "Demasiadas solicitudes. Espera un momento e intenta de nuevo",
+      400: data.error || t.form.errors.invalidData,
+      500: t.form.errors.server,
+      429: t.form.errors.rateLimit,
     };
-    return errorMessages[response.status] || data.error || "Error al enviar el mensaje";
+    return errorMessages[response.status] || data.error || t.form.errors.send;
   };
 
   const handleSubmit = async (e: FormEvent) => {
@@ -85,16 +87,16 @@ export function useContactForm() {
         throw new Error(getErrorMessage(response, data));
       }
 
-      toast.success("¡Mensaje enviado exitosamente! Te responderé pronto.", {
+      toast.success(t.form.success, {
         duration: 5000,
       });
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       console.error("Error enviando formulario:", error);
 
-      let errorMsg = "Error al enviar el mensaje";
+      let errorMsg = t.form.errors.send;
       if (error instanceof TypeError && error.message.includes("fetch")) {
-        errorMsg = "Error de conexión. Verifica tu conexión a internet";
+        errorMsg = t.form.errors.connection;
       } else if (error instanceof Error) {
         errorMsg = error.message;
       }

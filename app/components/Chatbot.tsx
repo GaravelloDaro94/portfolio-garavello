@@ -2,12 +2,13 @@
 
 import { useChatbot } from "../hooks/useChatbot";
 import { useBodyScrollLock } from "../hooks/useBodyScrollLock";
-import { SUGGESTED_QUESTIONS } from "../constants/chatbot";
+import { useI18n } from "../hooks/useI18n";
 import { ChatToggleButton } from "./chatbot/ChatToggleButton";
 import { ChatModal } from "./chatbot/ChatModal";
 import { DoomEasterEggModal } from "./chatbot/DoomEasterEggModal";
 
 export default function Chatbot() {
+  const { t } = useI18n();
   const {
     messages,
     input,
@@ -37,7 +38,7 @@ export default function Chatbot() {
           messagesEndRef={messagesEndRef as React.RefObject<HTMLDivElement>}
           handleSubmit={handleSubmit}
           handleSuggestedQuestion={handleSuggestedQuestion}
-          suggestedQuestions={SUGGESTED_QUESTIONS}
+          suggestedQuestions={[...t.chatbot.suggestedQuestions]}
           onClose={toggleChat}
         />
       )}

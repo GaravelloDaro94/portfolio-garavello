@@ -4,6 +4,7 @@ export interface ChatRequest {
     role: "user" | "assistant" | "system";
     content: string;
   }>;
+  language?: "es" | "en";
 }
 
 export interface ChatResponse {

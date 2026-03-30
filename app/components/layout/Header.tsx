@@ -4,20 +4,33 @@ import Link from "next/link";
 import { useState } from "react";
 import { useHeader } from "../../hooks/useHeader";
 import { useThemeDetection } from "../../hooks/useThemeDetection";
+import { useI18n } from "../../hooks/useI18n";
 import { SectionId } from "../../models";
 import ThemeToggle from "./ThemeToggle";
+import LanguageToggle from "./LanguageToggle";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [desktopMenuOpen, setDesktopMenuOpen] = useState(false);
   const { scrolled, scrollToSection } = useHeader();
   const { isDark } = useThemeDetection();
+  const { language, t } = useI18n();
 
   const navItems: SectionId[] = ["about", "projects", "skills", "contact"];
-  
+
+  const navLabels: Record<SectionId, string> = {
+    home: "home",
+    about: t.nav.about,
+    projects: t.nav.projects,
+    skills: t.nav.skills,
+    contact: t.nav.contact,
+  };
+
+  const desktopChevronTranslateClass = language === "es" ? "-translate-x-[460px]" : "-translate-x-[380px]";
+
   const getHeaderBackground = () => {
     if (!scrolled) return undefined;
-    return isDark ? 'rgba(58, 74, 88, 0.95)' : 'rgba(167, 199, 231, 0.95)';
+    return isDark ? "rgba(58, 74, 88, 0.95)" : "rgba(167, 199, 231, 0.95)";
   };
 
   return (
@@ -39,73 +52,72 @@ export default function Header() {
         >
           DG
         </button>
-        
-        {/* Desktop Navigation */}
+
         <div className="hidden md:flex items-center gap-6 relative">
-          {/* Navigation Items - appear as chevron passes */}
           <ul className="flex gap-6 items-center">
             {navItems.map((item, index) => (
-              <li 
+              <li
                 key={item}
                 className={`transition-all duration-300 ${
-                  desktopMenuOpen 
-                    ? 'opacity-100 translate-x-0' 
-                    : 'opacity-0 -translate-x-4'
+                  desktopMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
                 }`}
                 style={{
-                  transitionDelay: desktopMenuOpen ? `${index * 100}ms` : '0ms'
+                  transitionDelay: desktopMenuOpen ? `${index * 100}ms` : "0ms",
                 }}
               >
                 <button
                   onClick={() => scrollToSection(item)}
                   className="text-sm font-medium text-light-text dark:text-gray-300 hover:text-dark-charcoal dark:hover:text-dark-blue-pastel transition-colors capitalize whitespace-nowrap"
                 >
-                  {item}
+                  {navLabels[item]}
                 </button>
               </li>
             ))}
             <li
               className={`transition-all duration-300 ${
-                desktopMenuOpen 
-                  ? 'opacity-100 translate-x-0' 
-                  : 'opacity-0 -translate-x-4'
+                desktopMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
               }`}
               style={{
-                transitionDelay: desktopMenuOpen ? `${navItems.length * 100}ms` : '0ms'
+                transitionDelay: desktopMenuOpen ? `${navItems.length * 100}ms` : "0ms",
               }}
             >
               <Link
                 href="/blog"
                 className="text-sm font-medium text-light-text dark:text-gray-300 hover:text-dark-charcoal dark:hover:text-dark-blue-pastel transition-colors whitespace-nowrap"
               >
-                Blog
+                {t.nav.blog}
               </Link>
             </li>
           </ul>
 
-          {/* Chevron Button - slides to the left on click */}
-          <style dangerouslySetInnerHTML={{__html: `
-            @keyframes bounceHorizontal {
-              0%, 100% {
-                transform: translateX(0);
-              }
-              50% {
-                transform: translateX(-5px);
-              }
-            }
-            .chevron-btn:hover:not(.menu-open) .chevron-icon {
-              animation: bounceHorizontal 1s ease-in-out infinite;
-            }
-          `}} />
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `
+                @keyframes bounceHorizontal {
+                  0%, 100% {
+                    transform: translateX(0);
+                  }
+                  50% {
+                    transform: translateX(-5px);
+                  }
+                }
+                .chevron-btn:hover:not(.menu-open) .chevron-icon {
+                  animation: bounceHorizontal 1s ease-in-out infinite;
+                }
+              `,
+            }}
+          />
           <button
             onClick={() => setDesktopMenuOpen(!desktopMenuOpen)}
             className={`chevron-btn px-3 py-2 rounded-full text-light-text dark:text-dark-smoke hover:text-dark-charcoal dark:hover:text-dark-blue-pastel transition-all duration-500 hover:bg-light-text/10 dark:hover:bg-dark-medium/40 hover:backdrop-blur-sm hover:shadow-lg hover:shadow-yellow/40 dark:hover:shadow-dark-blue-pastel/40 ${
-              desktopMenuOpen ? '-translate-x-[420px] menu-open' : 'translate-x-0'
+              desktopMenuOpen ? `${desktopChevronTranslateClass} menu-open` : "translate-x-0"
             }`}
-            aria-label="Toggle navigation menu"
+            aria-label={desktopMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           >
             <svg
-              className={`chevron-icon w-6 h-6 transition-transform duration-300 ${desktopMenuOpen ? 'rotate-180' : ''}`}
+              className={`chevron-icon w-6 h-6 transition-transform duration-300 ${
+                desktopMenuOpen ? "rotate-180" : ""
+              }`}
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -116,17 +128,18 @@ export default function Header() {
               <path d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          
+
+          <LanguageToggle />
           <ThemeToggle />
         </div>
 
-        {/* Mobile Menu Button */}
         <div className="flex md:hidden items-center gap-3">
+          <LanguageToggle />
           <ThemeToggle />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="p-2 text-light-text dark:text-dark-smoke hover:text-dark-charcoal dark:hover:text-dark-blue-pastel transition-colors"
-            aria-label="Toggle menu"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
             <svg
               className="w-6 h-6"
@@ -146,7 +159,6 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="absolute top-full left-0 w-full bg-white/30 dark:bg-dark-medium/40 backdrop-blur-sm shadow-lg shadow-gray-300/50 dark:shadow-black/50 border-b-2 border-light-border dark:border-dark-medium md:hidden">
             <ul className="flex flex-col py-4">
@@ -159,7 +171,7 @@ export default function Header() {
                     }}
                     className="w-full text-left px-6 py-3 text-base font-medium text-light-text dark:text-gray-300 hover:bg-light-text/10 dark:hover:bg-dark-blue-pastel/10 hover:text-dark-charcoal dark:hover:text-dark-blue-pastel transition-colors capitalize"
                   >
-                    {item}
+                    {navLabels[item]}
                   </button>
                 </li>
               ))}
@@ -169,7 +181,7 @@ export default function Header() {
                   onClick={() => setMobileMenuOpen(false)}
                   className="block w-full text-left px-6 py-3 text-base font-medium text-light-text dark:text-gray-300 hover:bg-light-text/10 dark:hover:bg-dark-blue-pastel/10 hover:text-dark-charcoal dark:hover:text-dark-blue-pastel transition-colors"
                 >
-                  Blog
+                  {t.nav.blog}
                 </Link>
               </li>
             </ul>

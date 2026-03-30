@@ -4,17 +4,20 @@ import Image from "next/image";
 import QRCode from "react-qr-code";
 import TypewriterTitle from "../components/animations/TypewriterTitle";
 import FadeInCard from "../components/animations/FadeInCard";
+import { useI18n } from "../hooks/useI18n";
 import { TEXT_PRIMARY, GLASSMORPHISM_BASE, SHADOW_BASE, TEXT_ACCENT } from "../utils/styles";
 import movieTheaterImage from "../assets/movie-theater.png";
 import liviaAccesoriosImage from "../assets/livia-accesorios.png";
 
 export default function ProjectsSection() {
+  const { t } = useI18n();
+
   const projects = [
     {
       id: "ecommerce-platform",
-      title: "E-commerce Livia Accesorios",
-      description: "Plataforma de comercio electrónico completa con carrito de compras, procesamiento de pagos y panel de administración.",
-      tags: ["Nextjs", "Node.js", "Supabase", "Uala API"],
+      title: t.projects.items["ecommerce-platform"].title,
+      description: t.projects.items["ecommerce-platform"].description,
+      tags: ["Nextjs", "Node.js", "Supabase", "PostgreSQL", "Tailwind CSS", "Monolito"],
       demoUrl: "https://livia-accesorios-jilg.vercel.app/",
       repoUrls: [
         { label: "Repo", url: "https://gitlab.com/garavello.manuel/livia-accesorios" }
@@ -23,9 +26,9 @@ export default function ProjectsSection() {
     },
     {
       id: "task-management-app",
-      title: "Todo Togetter app",
-      description: "App mobile con Expo y React Native para gestión colaborativa de tareas. Incluye autenticación, contactos, asignación en tiempo real, recordatorios y sincronización con backend propio.",
-      tags: ["Expo", "React Native", "Zustand", "SQLite", "Socket.IO", "Prisma", "Railway"],
+      title: t.projects.items["task-management-app"].title,
+      description: t.projects.items["task-management-app"].description,
+      tags: ["Expo", "React Native", "Zustand", "SQLite", "PostgreSQL", "Socket.IO", "Prisma", "Railway"],
       demoUrl: "",
       repoUrls: [],
       imageUrl: null,
@@ -38,9 +41,9 @@ export default function ProjectsSection() {
     },
     {
       id: "movie-theater",
-      title: "Movie Theater",
-      description: "Un proyecto de streaming de películas con autenticación, sistema de filtros, acceso premium por pagos por stripe o mercado pago.",
-      tags: ["Stack MERN", "GraphQL", "PostgreSQL", "SASS"],
+      title: t.projects.items["movie-theater"].title,
+      description: t.projects.items["movie-theater"].description,
+      tags: ["Stack MERN", "GraphQL", "PostgreSQL", "SASS", "APIs externas (TMDB)"],
       demoUrl: "https://movie-theater-react.vercel.app/",
       repoUrls: [
         { label: "Frontend", url: "https://gitlab.com/garavello.manuel/movie-theater-react" },
@@ -85,7 +88,8 @@ export default function ProjectsSection() {
                   <QRCode value={apk} size={72} />
                 </div>
                 <span className="text-[11px] font-medium text-light-text dark:text-gray-400 text-center leading-tight">
-                  Descargar<br />APK
+                  {t.projects.labels.downloadApk}<br />
+                  APK
                 </span>
               </>
             ) : (
@@ -94,10 +98,12 @@ export default function ProjectsSection() {
                   <svg className="w-6 h-6 text-light-text/40 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                   </svg>
-                  <span className="text-[10px] text-light-text/40 dark:text-gray-500 text-center px-1">APK<br />próximo</span>
+                  <span className="text-[10px] text-light-text/40 dark:text-gray-500 text-center px-1">
+                    APK<br />{t.projects.labels.apkSoon}
+                  </span>
                 </div>
                 <span className="text-[11px] text-light-text/50 dark:text-gray-500 text-center leading-tight">
-                  Próximamente
+                  {t.projects.labels.comingSoon}
                 </span>
               </>
             )}
@@ -105,14 +111,14 @@ export default function ProjectsSection() {
         </div>
       );
     }
-    return <span className="text-light-text/50 dark:text-gray-500 text-sm">Imagen del proyecto</span>;
+    return <span className="text-light-text/50 dark:text-gray-500 text-sm">{t.projects.labels.projectImage}</span>;
   };
 
   return (
     <section id="projects" className="h-full flex items-center justify-center px-4 sm:px-6 pl-12 sm:pl-16 py-8 sm:py-10 md:py-20">
       <div className="max-w-6xl w-full">
         <TypewriterTitle 
-          text="Proyectos Destacados" 
+          text={t.projects.title}
           className={`text-2xl sm:text-3xl md:text-4xl font-bold ${TEXT_PRIMARY} mb-8 sm:mb-8`}
         />
         {/* Scroll horizontal en móvil, grid en desktop */}
@@ -160,7 +166,7 @@ export default function ProjectsSection() {
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                           </svg>
-                          Ver Proyecto
+                          {t.projects.labels.demoProject}
                         </a>
                       )}
                       {project.repoUrls.map((repo) => (
@@ -200,7 +206,7 @@ export default function ProjectsSection() {
                           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                           </svg>
-                          Descargar APK
+                          {t.projects.labels.downloadApk}
                         </a>
                       )}
                     </div>

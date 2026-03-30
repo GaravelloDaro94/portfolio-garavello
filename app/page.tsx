@@ -8,6 +8,9 @@ import ProjectsSection from "./screens/ProjectsSection";
 import SkillsSection from "./screens/SkillsSection";
 import ContactSection from "./screens/ContactSection";
 import Footer from "./screens/Footer";
+import { getSiteUrl } from "@/lib/site";
+
+const siteUrl = getSiteUrl();
 
 // JSON-LD Structured Data para SEO
 const jsonLd = {
@@ -16,7 +19,7 @@ const jsonLd = {
   "name": "Darío Garavello",
   "jobTitle": "Developer",
   "description": "Desarrollador especializado en React, Next.js, TypeScript, Node.js y tecnologías modernas web",
-  "url": "https://portfolio-garavello.vercel.app",
+  "url": siteUrl,
   "sameAs": [
     // Agregar links a redes sociales cuando estén disponibles
     // "https://github.com/tu-usuario",

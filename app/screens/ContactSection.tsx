@@ -1,14 +1,19 @@
+"use client";
+
 import ContactForm from "../components/ContactForm";
 import TypewriterTitle from "../components/animations/TypewriterTitle";
 import Link from "next/link";
+import { useI18n } from "../hooks/useI18n";
 import { BUTTON_ICON_BASE, BUTTON_PRIMARY, TEXT_PRIMARY } from "../utils/styles";
 
 export default function ContactSection() {
+  const { t } = useI18n();
+
   return (
     <section id="contact" className="min-h-screen flex items-center justify-center px-4 sm:px-6 pl-12 sm:pl-16 py-12 sm:py-20">
       <div className="max-w-4xl w-full">
         <TypewriterTitle 
-          text="Contacto" 
+          text={t.contact.title}
           className="text-2xl sm:text-3xl md:text-4xl font-bold text-light-text dark:text-dark-smoke mb-6 sm:mb-8"
         />
         
@@ -16,7 +21,7 @@ export default function ContactSection() {
           {/* Social Icons with Description */}
           <div className="space-y-6">
             <p className={`text-lg sm:text-xl ${TEXT_PRIMARY}`}>
-              Si te interesó para ser tu candidato perfecto, puedes contactarme escribiendo en el siguiente formulario
+              {t.contact.intro}
             </p>
             <div className="flex items-center gap-4">
             <a

@@ -1,13 +1,18 @@
+"use client";
+
 import { SuggestedQuestionsProps } from "../../models";
+import { useI18n } from "@/app/hooks/useI18n";
 
 export function SuggestedQuestions({
   questions,
   onQuestionClick,
 }: Readonly<SuggestedQuestionsProps>) {
+  const { t } = useI18n();
+
   return (
     <div className="flex-shrink-0 px-4 sm:px-6 py-3 border-t-2 border-gray-200 dark:border-gray-700">
       <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">
-        Preguntas sugeridas:
+        {t.chatbot.suggestedLabel}
       </p>
       <div className="flex flex-wrap gap-2">
         {questions.map((question) => (

@@ -2,17 +2,12 @@
 
 import TypewriterEffect from "../components/animations/TypewriterEffect";
 import { useHeader } from "../hooks/useHeader";
+import { useI18n } from "../hooks/useI18n";
 import { TEXT_PRIMARY, GLASSMORPHISM_BASE, SHADOW_BASE, SHADOW_HOVER } from "../utils/styles";
 
 export default function MainSection() {
   const { scrollToSection } = useHeader();
-  
-  const phrases = [
-    "Fullstack Developer",
-    "Software Engineer",
-    "Programador",
-    "Solucionador de problemas"
-  ];
+  const { t } = useI18n();
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center px-4 sm:px-6 pl-12 sm:pl-16">
@@ -24,13 +19,13 @@ export default function MainSection() {
             <span className="ml-8 sm:ml-12 md:ml-18">Garavello</span>
           </h1>
           <p className="ml-12 sm:ml-24 md:ml-36 text-xl sm:text-2xl md:text-3xl text-light-text dark:text-dark-blue-pastel font-light">
-            <TypewriterEffect phrases={phrases} />
+            <TypewriterEffect phrases={[...t.main.phrases]} />
           </p>
           <div className="pt-8 flex justify-center">
             <button 
               onClick={() => scrollToSection("about")}
               className={`p-3 rounded-xl transition-all cursor-pointer ${GLASSMORPHISM_BASE} ${SHADOW_BASE} ${SHADOW_HOVER}`}
-              aria-label="Scroll to about section"
+              aria-label={t.main.scrollToAboutAria}
             >
               <svg 
                 className={`w-8 h-8 ${TEXT_PRIMARY} animate-bounce`}

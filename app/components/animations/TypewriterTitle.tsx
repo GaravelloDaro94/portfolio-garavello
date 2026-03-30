@@ -38,6 +38,10 @@ export default function TypewriterTitle({
   }, []);
 
   useEffect(() => {
+    setDisplayText("");
+  }, [text]);
+
+  useEffect(() => {
     if (!isVisible || displayText.length >= text.length) return;
 
     const timeout = setTimeout(() => {

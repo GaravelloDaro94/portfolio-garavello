@@ -32,9 +32,51 @@ const PORTFOLIO_INFO = {
   ],
 };
 
-// Función para generar respuestas basadas en keywords
-function generateLocalResponse(userMessage: string): string {
+type SupportedLanguage = "es" | "en";
+
+// Funcion para generar respuestas basadas en keywords
+function generateLocalResponse(userMessage: string, language: SupportedLanguage): string {
   const msg = userMessage.toLowerCase();
+
+  if (language === "en") {
+    if (
+      msg.includes("technolog") ||
+      msg.includes("stack") ||
+      msg.includes("tools") ||
+      msg.includes("framework")
+    ) {
+      return `I work with several modern technologies:\n\n• Frontend: ${PORTFOLIO_INFO.tecnologias.slice(0, 3).join(", ")}\n• Backend: ${PORTFOLIO_INFO.tecnologias.slice(3, 6).join(", ")}\n• Styling: ${PORTFOLIO_INFO.tecnologias[6]}\n\nI keep up with web development trends and continuously improve my skills.`;
+    }
+
+    if (msg.includes("experience") || msg.includes("work") || msg.includes("company")) {
+      return `I currently work at ${PORTFOLIO_INFO.empresa} as a ${PORTFOLIO_INFO.rol}. I have experience building scalable and modern applications using industry best practices and teamwork to deliver efficient solutions.`;
+    }
+
+    if (msg.includes("project") || msg.includes("portfolio") || msg.includes("develop")) {
+      const projectsList = PORTFOLIO_INFO.proyectos.map((p, i) => `${i + 1}. ${p}`).join("\n\n");
+      return `I have built several interesting projects:\n\n${projectsList}\n\nEach project helped me improve my skills and tackle new challenges.`;
+    }
+
+    if (
+      msg.includes("strength") ||
+      msg.includes("skill") ||
+      msg.includes("soft skill") ||
+      msg.includes("quality")
+    ) {
+      const strengthsList = PORTFOLIO_INFO.fortalezas.map((f) => `• ${f}`).join("\n");
+      return `My main strengths are:\n\n${strengthsList}\n\nI believe these strengths, together with my technical knowledge, let me contribute effectively to any team.`;
+    }
+
+    if (msg.includes("contact") || msg.includes("email") || msg.includes("reach")) {
+      return "You can contact me through the contact form on this page, or directly by email. I will be happy to answer your questions or discuss collaboration opportunities.";
+    }
+
+    if (msg.includes("hello") || msg.includes("hi") || msg.includes("hey")) {
+      return `Hi! I am ${PORTFOLIO_INFO.nombre}'s virtual assistant. How can I help you? I can tell you about his experience, technologies, projects, or strengths.`;
+    }
+
+    return `Thanks for your question. I am ${PORTFOLIO_INFO.nombre}, a ${PORTFOLIO_INFO.rol} specialized in modern web development. I do not have a specific answer for that yet, but feel free to ask me about experience, technologies, or projects. You can also use the contact form to reach out directly.`;
+  }
 
   if (
     msg.includes("tecnolog") ||
@@ -113,7 +155,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json<ChatError>({ error: "Formato de datos inválido" }, { status: 400 });
     }
 
-    const { messages }: ChatRequest = body;
+    const { messages, language }: ChatRequest = body;
+    const userLanguage: SupportedLanguage = language === "en" ? "en" : "es";
 
     if (!messages || !Array.isArray(messages)) {
       return NextResponse.json<ChatError>(
@@ -133,7 +176,7 @@ export async function POST(request: NextRequest) {
 
     // Si no hay API key de OpenAI, usar respuestas locales
     if (!openai || !process.env.OPENAI_API_KEY) {
-      const reply = generateLocalResponse(lastMessage.content);
+      const reply = generateLocalResponse(lastMessage.content, userLanguage);
       return NextResponse.json<ChatResponse>({ reply });
     }
 
@@ -150,7 +193,7 @@ export async function POST(request: NextRequest) {
 
       if (!reply) {
         console.warn("OpenAI no devolvió respuesta, usando respuesta local");
-        const localReply = generateLocalResponse(lastMessage.content);
+        const localReply = generateLocalResponse(lastMessage.content, userLanguage);
         return NextResponse.json<ChatResponse>({ reply: localReply });
       }
 
@@ -158,7 +201,7 @@ export async function POST(request: NextRequest) {
     } catch (openaiError) {
       // Si falla OpenAI (por cuota excedida u otro error), usar respuestas locales
       console.warn("OpenAI error, using local responses:", openaiError);
-      const reply = generateLocalResponse(lastMessage.content);
+      const reply = generateLocalResponse(lastMessage.content, userLanguage);
       return NextResponse.json<ChatResponse>({ reply });
     }
   } catch (error) {

@@ -4,6 +4,7 @@ import "./globals.scss";
 import { Providers } from "./providers";
 import UmamiAnalytics from "./components/UmamiAnalytics";
 import { Toaster } from "sonner";
+import { getSiteUrl } from "@/lib/site";
 
 // Dark mode fonts
 const inter = Inter({
@@ -26,6 +27,8 @@ const raleway = Raleway({
   variable: "--font-raleway",
   subsets: ["latin"],
 });
+
+const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
   title: {
@@ -50,7 +53,7 @@ export const metadata: Metadata = {
     "PostgreSQL",
     "Tailwind CSS"
   ],
-  authors: [{ name: "Darío Garavello", url: "https://portfolio-garavello.vercel.app" }],
+  authors: [{ name: "Darío Garavello", url: siteUrl }],
   creator: "Darío Garavello",
   publisher: "Darío Garavello",
   formatDetection: {
@@ -58,14 +61,14 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://portfolio-garavello.vercel.app"),
+  metadataBase: new URL(siteUrl),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "Darío Garavello",
     description: "Portfolio de Darío Garavello especializado en React, Next.js, TypeScript, Node.js y tecnologías modernas web.",
-    url: "https://portfolio-garavello.vercel.app",
+    url: siteUrl,
     siteName: "Darío Garavello Portfolio",
     locale: "es_AR",
     type: "website",

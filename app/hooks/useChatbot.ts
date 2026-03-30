@@ -3,15 +3,16 @@ import { toast } from "sonner";
 import { Message } from "../models";
 import { DOOM_EASTER_EGG_REPLY } from "../constants/doom";
 import { isDoomEasterEggTrigger } from "../utils/doomEasterEgg";
-
-const INITIAL_MESSAGE: Message = {
-  role: "assistant",
-  content:
-    "¡Hola! Soy el asistente virtual de Darío. Puedes preguntarme sobre su experiencia, habilidades, proyectos o cualquier otra cosa relacionada con su trabajo. ¿En qué puedo ayudarte?",
-};
+import { useI18n } from "./useI18n";
 
 export function useChatbot() {
-  const [messages, setMessages] = useState<Message[]>([INITIAL_MESSAGE]);
+  const { language, t } = useI18n();
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      role: "assistant",
+      content: t.chatbot.initialMessage,
+    },
+  ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -37,6 +38,17 @@ export function useChatbot() {
     };
   }, []);
 
+  useEffect(() => {
+    setMessages([
+      {
+        role: "assistant",
+        content: t.chatbot.initialMessage,
+      },
+    ]);
+    setInput("");
+    setIsLoading(false);
+  }, [language, t.chatbot.initialMessage]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
@@ -50,8 +62,7 @@ export function useChatbot() {
       if (isMobile) {
         const mobileMessage: Message = {
           role: "assistant",
-          content:
-            "Este easter egg no está disponible en dispositivos móviles. 🖥️ Probalo desde una PC.",
+          content: t.chatbot.mobileUnavailable,
         };
         setMessages((prev) => [...prev, mobileMessage]);
         setIsLoading(false);
@@ -81,7 +92,7 @@ export function useChatbot() {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: [...messages, userMessage] }),
+        body: JSON.stringify({ messages: [...messages, userMessage], language }),
       });
 
       if (!response.ok) {
@@ -95,7 +106,7 @@ export function useChatbot() {
       }
 
       if (!data.reply) {
-        throw new Error("No se recibió respuesta del asistente");
+        throw new Error(t.chatbot.noReply);
       }
 
       const assistantMessage: Message = {
@@ -106,18 +117,18 @@ export function useChatbot() {
     } catch (error) {
       console.error("Error en chatbot:", error);
 
-      let errorMsg = "Error desconocido";
+      let errorMsg = t.chatbot.unknownError;
       if (error instanceof TypeError && error.message.includes("fetch")) {
-        errorMsg = "Error de conexión. Verifica tu conexión a internet";
+        errorMsg = t.chatbot.connectionError;
       } else if (error instanceof Error) {
         errorMsg = error.message;
       }
 
-      toast.error(`Error en el chat: ${errorMsg}`);
+      toast.error(`${t.chatbot.chatErrorPrefix} ${errorMsg}`);
 
       const errorMessage: Message = {
         role: "assistant",
-        content: `Lo siento, hubo un error: ${errorMsg}. Por favor, intenta de nuevo.`,
+        content: `${t.chatbot.assistantErrorPrefix} ${errorMsg}. ${t.chatbot.assistantErrorSuffix}`,
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
