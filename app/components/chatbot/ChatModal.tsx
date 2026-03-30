@@ -17,7 +17,7 @@ export function ChatModal({
 }: Readonly<ChatModalProps>) {
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-      <div className="w-full max-w-3xl max-h-[90vh] flex flex-col rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 bg-white dark:bg-gray-800 dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]">
+      <div className="w-full max-w-3xl h-[78dvh] max-h-[78dvh] md:h-auto md:max-h-[90vh] flex flex-col rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 bg-white dark:bg-gray-800 dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)]">
         <ChatHeader onClose={onClose} />
 
         <ChatMessages

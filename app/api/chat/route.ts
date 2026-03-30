@@ -17,6 +17,7 @@ const PORTFOLIO_INFO = {
     "PostgreSQL",
     "MongoDB",
     "Tailwind CSS",
+    "SASS",
   ],
   proyectos: [
     "E-commerce Livia Accesorios: Plataforma de comercio electrónico completa con carrito de compras, procesamiento de pagos y panel de administración.",
@@ -45,7 +46,7 @@ function generateLocalResponse(userMessage: string, language: SupportedLanguage)
       msg.includes("tools") ||
       msg.includes("framework")
     ) {
-      return `I work with several modern technologies:\n\n• Frontend: ${PORTFOLIO_INFO.tecnologias.slice(0, 3).join(", ")}\n• Backend: ${PORTFOLIO_INFO.tecnologias.slice(3, 6).join(", ")}\n• Styling: ${PORTFOLIO_INFO.tecnologias[6]}\n\nI keep up with web development trends and continuously improve my skills.`;
+      return `I work with several modern technologies:\n\n• Frontend: ${PORTFOLIO_INFO.tecnologias.slice(0, 3).join(", ")}\n• Backend: ${PORTFOLIO_INFO.tecnologias.slice(3, 6).join(", ")}\n• Styling: ${PORTFOLIO_INFO.tecnologias[7]}, ${PORTFOLIO_INFO.tecnologias[8]}\n\nI keep up with web development trends and continuously improve my skills.`;
     }
 
     if (msg.includes("experience") || msg.includes("work") || msg.includes("company")) {
@@ -84,7 +85,7 @@ function generateLocalResponse(userMessage: string, language: SupportedLanguage)
     msg.includes("stack") ||
     msg.includes("herramienta")
   ) {
-    return `Domino varias tecnologías modernas:\n\n• Frontend: ${PORTFOLIO_INFO.tecnologias.slice(0, 3).join(", ")}\n• Backend: ${PORTFOLIO_INFO.tecnologias.slice(3, 6).join(", ")}\n• Styling: ${PORTFOLIO_INFO.tecnologias[6]}\n\nMe mantengo actualizado con las últimas tendencias en desarrollo web y siempre busco mejorar mis habilidades.`;
+    return `Domino varias tecnologías modernas:\n\n• Frontend: ${PORTFOLIO_INFO.tecnologias.slice(0, 3).join(", ")}\n• Backend: ${PORTFOLIO_INFO.tecnologias.slice(3, 7).join(", ")}\n• Styling: ${PORTFOLIO_INFO.tecnologias[7]}, ${PORTFOLIO_INFO.tecnologias[8]}\n\nMe mantengo actualizado con las últimas tendencias en desarrollo web y siempre busco mejorar mis habilidades.`;
   }
 
   if (msg.includes("experiencia") || msg.includes("trabaja") || msg.includes("empresa")) {
