@@ -18,7 +18,7 @@ export default function ProjectsSection() {
       title: t.projects.items["ecommerce-platform"].title,
       description: t.projects.items["ecommerce-platform"].description,
       tags: ["Nextjs", "Node.js", "Supabase", "PostgreSQL", "Tailwind CSS", "Monolito"],
-      demoUrl: "https://livia-accesorios-jilg.vercel.app/",
+      demoUrl: "https://www.liviaccesorios.com.ar/",
       repoUrls: [
         { label: "Repo", url: "https://gitlab.com/garavello.manuel/livia-accesorios" }
       ],
