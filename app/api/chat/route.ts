@@ -18,10 +18,12 @@ const PORTFOLIO_INFO = {
     "MongoDB",
     "Tailwind CSS",
     "SASS",
+    "Laravel(PHP)",
   ],
   proyectos: [
     "E-commerce Livia Accesorios: Plataforma de comercio electrónico completa con carrito de compras, procesamiento de pagos y panel de administración.",
     "Todo Togetter app: App mobile con Expo y React Native para gestión colaborativa de tareas. Incluye autenticación, contactos, asignación en tiempo real, recordatorios y sincronización con backend propio.",
+    "Eventra: Plataforma de gestión de eventos construida con Laravel y arquitectura modular, con APIs documentadas y flujo end-to-end para operación y seguimiento.",
     "Movie Theater: Un proyecto de streaming de películas con autenticación, sistema de filtros, acceso premium por pagos por stripe o mercado pago.",
   ],
   fortalezas: [
@@ -35,87 +37,88 @@ const PORTFOLIO_INFO = {
 
 type SupportedLanguage = "es" | "en";
 
-// Funcion para generar respuestas basadas en keywords
-function generateLocalResponse(userMessage: string, language: SupportedLanguage): string {
-  const msg = userMessage.toLowerCase();
+function includesAny(message: string, keywords: readonly string[]): boolean {
+  return keywords.some((keyword) => message.includes(keyword));
+}
 
-  if (language === "en") {
-    if (
-      msg.includes("technolog") ||
-      msg.includes("stack") ||
-      msg.includes("tools") ||
-      msg.includes("framework")
-    ) {
-      return `I work with several modern technologies:\n\n• Frontend: ${PORTFOLIO_INFO.tecnologias.slice(0, 3).join(", ")}\n• Backend: ${PORTFOLIO_INFO.tecnologias.slice(3, 6).join(", ")}\n• Styling: ${PORTFOLIO_INFO.tecnologias[7]}, ${PORTFOLIO_INFO.tecnologias[8]}\n\nI keep up with web development trends and continuously improve my skills.`;
-    }
+function getProjectsList(): string {
+  return PORTFOLIO_INFO.proyectos.map((p, i) => `${i + 1}. ${p}`).join("\n\n");
+}
 
-    if (msg.includes("experience") || msg.includes("work") || msg.includes("company")) {
-      return `I currently work at ${PORTFOLIO_INFO.empresa} as a ${PORTFOLIO_INFO.rol}. I have experience building scalable and modern applications using industry best practices and teamwork to deliver efficient solutions.`;
-    }
+function getStrengthsList(): string {
+  return PORTFOLIO_INFO.fortalezas.map((f) => `• ${f}`).join("\n");
+}
 
-    if (msg.includes("project") || msg.includes("portfolio") || msg.includes("develop")) {
-      const projectsList = PORTFOLIO_INFO.proyectos.map((p, i) => `${i + 1}. ${p}`).join("\n\n");
-      return `I have built several interesting projects:\n\n${projectsList}\n\nEach project helped me improve my skills and tackle new challenges.`;
-    }
-
-    if (
-      msg.includes("strength") ||
-      msg.includes("skill") ||
-      msg.includes("soft skill") ||
-      msg.includes("quality")
-    ) {
-      const strengthsList = PORTFOLIO_INFO.fortalezas.map((f) => `• ${f}`).join("\n");
-      return `My main strengths are:\n\n${strengthsList}\n\nI believe these strengths, together with my technical knowledge, let me contribute effectively to any team.`;
-    }
-
-    if (msg.includes("contact") || msg.includes("email") || msg.includes("reach")) {
-      return "You can contact me through the contact form on this page, or directly by email. I will be happy to answer your questions or discuss collaboration opportunities.";
-    }
-
-    if (msg.includes("hello") || msg.includes("hi") || msg.includes("hey")) {
-      return `Hi! I am ${PORTFOLIO_INFO.nombre}'s virtual assistant. How can I help you? I can tell you about his experience, technologies, projects, or strengths.`;
-    }
-
-    return `Thanks for your question. I am ${PORTFOLIO_INFO.nombre}, a ${PORTFOLIO_INFO.rol} specialized in modern web development. I do not have a specific answer for that yet, but feel free to ask me about experience, technologies, or projects. You can also use the contact form to reach out directly.`;
+function generateEnglishLocalResponse(msg: string): string | null {
+  if (includesAny(msg, ["technolog", "stack", "tools", "framework"])) {
+    return `I work with several modern technologies:\n\n• Frontend: ${PORTFOLIO_INFO.tecnologias.slice(0, 3).join(", ")}\n• Backend: ${PORTFOLIO_INFO.tecnologias.slice(3, 6).join(", ")}\n• Styling: ${PORTFOLIO_INFO.tecnologias[7]}, ${PORTFOLIO_INFO.tecnologias[8]}\n\nI keep up with web development trends and continuously improve my skills.`;
   }
 
-  if (
-    msg.includes("tecnolog") ||
-    msg.includes("domina") ||
-    msg.includes("stack") ||
-    msg.includes("herramienta")
-  ) {
+  if (includesAny(msg, ["experience", "work", "company"])) {
+    return `I currently work at ${PORTFOLIO_INFO.empresa} as a ${PORTFOLIO_INFO.rol}. I have experience building scalable and modern applications using industry best practices and teamwork to deliver efficient solutions.`;
+  }
+
+  if (includesAny(msg, ["project", "portfolio", "develop"])) {
+    return `I have built several interesting projects:\n\n${getProjectsList()}\n\nEach project helped me improve my skills and tackle new challenges.`;
+  }
+
+  if (includesAny(msg, ["strength", "skill", "soft skill", "quality"])) {
+    return `My main strengths are:\n\n${getStrengthsList()}\n\nI believe these strengths, together with my technical knowledge, let me contribute effectively to any team.`;
+  }
+
+  if (includesAny(msg, ["contact", "email", "reach"])) {
+    return "You can contact me through the contact form on this page, or directly by email. I will be happy to answer your questions or discuss collaboration opportunities.";
+  }
+
+  if (includesAny(msg, ["hello", "hi", "hey"])) {
+    return `Hi! I am ${PORTFOLIO_INFO.nombre}'s virtual assistant. How can I help you? I can tell you about his experience, technologies, projects, or strengths.`;
+  }
+
+  return null;
+}
+
+function generateSpanishLocalResponse(msg: string): string | null {
+  if (includesAny(msg, ["tecnolog", "domina", "stack", "herramienta"])) {
     return `Domino varias tecnologías modernas:\n\n• Frontend: ${PORTFOLIO_INFO.tecnologias.slice(0, 3).join(", ")}\n• Backend: ${PORTFOLIO_INFO.tecnologias.slice(3, 7).join(", ")}\n• Styling: ${PORTFOLIO_INFO.tecnologias[7]}, ${PORTFOLIO_INFO.tecnologias[8]}\n\nMe mantengo actualizado con las últimas tendencias en desarrollo web y siempre busco mejorar mis habilidades.`;
   }
 
-  if (msg.includes("experiencia") || msg.includes("trabaja") || msg.includes("empresa")) {
+  if (includesAny(msg, ["experiencia", "trabaja", "empresa"])) {
     return `Actualmente trabajo en ${PORTFOLIO_INFO.empresa} como ${PORTFOLIO_INFO.rol}. Tengo experiencia desarrollando aplicaciones escalables y modernas, utilizando las mejores prácticas de la industria y trabajando en equipo para crear soluciones eficientes.`;
   }
 
-  if (msg.includes("proyecto") || msg.includes("portafolio") || msg.includes("desarrollo")) {
-    const proyectosList = PORTFOLIO_INFO.proyectos.map((p, i) => `${i + 1}. ${p}`).join("\n\n");
-    return `He desarrollado varios proyectos interesantes:\n\n${proyectosList}\n\nCada proyecto me ha permitido mejorar mis habilidades y enfrentar nuevos desafíos.`;
+  if (includesAny(msg, ["proyecto", "portafolio", "desarrollo"])) {
+    return `He desarrollado varios proyectos interesantes:\n\n${getProjectsList()}\n\nCada proyecto me ha permitido mejorar mis habilidades y enfrentar nuevos desafíos.`;
   }
 
-  if (
-    msg.includes("fortaleza") ||
-    msg.includes("cualidad") ||
-    msg.includes("habilidad") ||
-    msg.includes("soft skill")
-  ) {
-    const fortalezasList = PORTFOLIO_INFO.fortalezas.map((f) => `• ${f}`).join("\n");
-    return `Mis principales fortalezas son:\n\n${fortalezasList}\n\nCreo que estas habilidades, combinadas con mi conocimiento técnico, me permiten contribuir efectivamente a cualquier equipo.`;
+  if (includesAny(msg, ["fortaleza", "cualidad", "habilidad", "soft skill"])) {
+    return `Mis principales fortalezas son:\n\n${getStrengthsList()}\n\nCreo que estas habilidades, combinadas con mi conocimiento técnico, me permiten contribuir efectivamente a cualquier equipo.`;
   }
 
-  if (msg.includes("contacto") || msg.includes("email") || msg.includes("comunicar")) {
-    return `Puedes contactarme a través del formulario de contacto en esta página, o directamente por email. Estaré encantado de responder tus preguntas o discutir oportunidades de colaboración.`;
+  if (includesAny(msg, ["contacto", "email", "comunicar"])) {
+    return "Puedes contactarme a través del formulario de contacto en esta página, o directamente por email. Estaré encantado de responder tus preguntas o discutir oportunidades de colaboración.";
   }
 
-  if (msg.includes("hola") || msg.includes("buenos") || msg.includes("saludos")) {
+  if (includesAny(msg, ["hola", "buenos", "saludos"])) {
     return `¡Hola! 👋 Soy el asistente virtual de ${PORTFOLIO_INFO.nombre}. ¿En qué puedo ayudarte? Puedo contarte sobre su experiencia, tecnologías, proyectos o fortalezas.`;
   }
 
-  // Respuesta por defecto
+  return null;
+}
+
+// Funcion para generar respuestas basadas en keywords
+function generateLocalResponse(userMessage: string, language: SupportedLanguage): string {
+  const msg = userMessage.toLowerCase();
+  const response =
+    language === "en" ? generateEnglishLocalResponse(msg) : generateSpanishLocalResponse(msg);
+
+  if (response) {
+    return response;
+  }
+
+  if (language === "en") {
+    return `Thanks for your question. I am ${PORTFOLIO_INFO.nombre}, a ${PORTFOLIO_INFO.rol} specialized in modern web development. I do not have a specific answer for that yet, but feel free to ask me about experience, technologies, or projects. You can also use the contact form to reach out directly.`;
+  }
+
   return `Gracias por tu pregunta. Soy ${PORTFOLIO_INFO.nombre}, ${PORTFOLIO_INFO.rol} especializado en desarrollo web moderno. Por ahora esa pregunta no tengo respuesta dentro de mi sistema, si quieres saber más sobre mí, no dudes en preguntarme. También puedes usar el formulario de contacto para comunicarte directamente conmigo. Muchas gracias.`;
 }
 

@@ -12,6 +12,14 @@ type BlogPostPreview = {
   category: string;
   tags: string[];
   readTime?: string;
+  translations?: {
+    en?: {
+      title: string;
+      excerpt: string;
+      category: string;
+      readTime?: string;
+    };
+  };
 };
 
 interface BlogPageClientProps {
@@ -19,8 +27,8 @@ interface BlogPageClientProps {
 }
 
 export default function BlogPageClient({ posts }: Readonly<BlogPageClientProps>) {
-  const { language, t } = useI18n();
-  const dateLocale = language === "en" ? "en-US" : "es-AR";
+  const { languageState, t } = useI18n();
+  const dateLocale = languageState === "en" ? "en-US" : "es-AR";
 
   return (
     <div className="min-h-screen py-20 px-6 relative z-10">
@@ -48,15 +56,19 @@ export default function BlogPageClient({ posts }: Readonly<BlogPageClientProps>)
           </div>
         ) : (
           <div className="grid gap-6">
-            {posts.map((post) => (
-              <Link
-                key={post.slug}
-                href={`/blog/${post.slug}`}
-                className="group block rounded-2xl p-6 sm:p-8 hover:bg-yellow/10 dark:hover:bg-dark-blue-pastel/10 transition-all bg-white/30 dark:bg-dark-medium/40 backdrop-blur-sm shadow-md shadow-gray-300/50 dark:shadow-black/50 hover:shadow-xl hover:shadow-yellow/30 dark:hover:shadow-dark-blue-pastel/30"
-              >
+            {posts.map((post) => {
+              const localized =
+                languageState === "en" && post.translations?.en ? post.translations.en : post;
+
+              return (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="group block rounded-2xl p-6 sm:p-8 hover:bg-yellow/10 dark:hover:bg-dark-blue-pastel/10 transition-all bg-white/30 dark:bg-dark-medium/40 backdrop-blur-sm shadow-md shadow-gray-300/50 dark:shadow-black/50 hover:shadow-xl hover:shadow-yellow/30 dark:hover:shadow-dark-blue-pastel/30"
+                >
                 <div className="flex items-center gap-3 mb-3">
                   <span className="px-3 py-1 bg-mint dark:bg-dark-blue-gray text-light-text dark:text-gray-300 text-sm rounded-full">
-                    {post.category}
+                    {localized.category}
                   </span>
                   <span className="text-sm text-gray-500 dark:text-gray-400">
                     {new Date(post.date).toLocaleDateString(dateLocale, {
@@ -65,14 +77,14 @@ export default function BlogPageClient({ posts }: Readonly<BlogPageClientProps>)
                       day: "numeric",
                     })}
                   </span>
-                  {post.readTime && (
-                    <span className="text-sm text-gray-500 dark:text-gray-400">• {post.readTime}</span>
+                  {localized.readTime && (
+                    <span className="text-sm text-gray-500 dark:text-gray-400">• {localized.readTime}</span>
                   )}
                 </div>
                 <h2 className="text-xl sm:text-2xl font-bold text-light-text dark:text-dark-smoke mb-3 group-hover:text-dark-charcoal dark:group-hover:text-dark-blue-pastel transition-colors">
-                  {post.title}
+                  {localized.title}
                 </h2>
-                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">{post.excerpt}</p>
+                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4">{localized.excerpt}</p>
                 {post.tags.length > 0 && (
                   <div className="flex flex-wrap gap-2">
                     {post.tags.map((tag) => (
@@ -85,8 +97,9 @@ export default function BlogPageClient({ posts }: Readonly<BlogPageClientProps>)
                     ))}
                   </div>
                 )}
-              </Link>
-            ))}
+                </Link>
+              );
+            })}
           </div>
         )}
       </div>

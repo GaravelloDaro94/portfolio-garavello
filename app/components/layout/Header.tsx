@@ -14,7 +14,7 @@ export default function Header() {
   const [desktopMenuOpen, setDesktopMenuOpen] = useState(false);
   const { scrolled, scrollToSection } = useHeader();
   const { isDark } = useThemeDetection();
-  const { language, t } = useI18n();
+  const { languageState, t } = useI18n();
 
   const navItems: SectionId[] = ["about", "projects", "skills", "contact"];
 
@@ -26,7 +26,8 @@ export default function Header() {
     contact: t.nav.contact,
   };
 
-  const desktopChevronTranslateClass = language === "es" ? "-translate-x-[460px]" : "-translate-x-[380px]";
+  const desktopChevronTranslateClass =
+    languageState === "es" ? "-translate-x-[460px]" : "-translate-x-[380px]";
 
   const getHeaderBackground = () => {
     if (!scrolled) return undefined;

@@ -14,6 +14,14 @@ type BlogPostDetail = {
   tags: string[];
   content: string;
   readTime?: string;
+  translations?: {
+    en?: {
+      title: string;
+      category: string;
+      content: string;
+      readTime?: string;
+    };
+  };
 };
 
 interface BlogPostClientProps {
@@ -21,8 +29,9 @@ interface BlogPostClientProps {
 }
 
 export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) {
-  const { language, t } = useI18n();
-  const dateLocale = language === "en" ? "en-US" : "es-AR";
+  const { languageState, t } = useI18n();
+  const dateLocale = languageState === "en" ? "en-US" : "es-AR";
+  const localized = languageState === "en" && post.translations?.en ? post.translations.en : post;
 
   return (
     <div className="min-h-screen py-20 px-6 relative z-10">
@@ -41,7 +50,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
         <header className="mb-12">
           <div className="flex items-center gap-3 mb-4">
             <span className="px-3 py-1 bg-mint dark:bg-dark-blue-gray text-light-text dark:text-gray-300 text-sm rounded-full">
-              {post.category}
+              {localized.category}
             </span>
             <span className="text-sm text-gray-500 dark:text-gray-400">
               {new Date(post.date).toLocaleDateString(dateLocale, {
@@ -50,10 +59,12 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
                 day: "numeric",
               })}
             </span>
-            {post.readTime && <span className="text-sm text-gray-500 dark:text-gray-400">• {post.readTime}</span>}
+            {localized.readTime && (
+              <span className="text-sm text-gray-500 dark:text-gray-400">• {localized.readTime}</span>
+            )}
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-light-text dark:text-dark-smoke mb-4">
-            {post.title}
+            {localized.title}
           </h1>
           {post.tags.length > 0 && (
             <div className="flex flex-wrap gap-2">
@@ -133,7 +144,7 @@ export default function BlogPostClient({ post }: Readonly<BlogPostClientProps>) 
               prose-blockquote:border-l-dark-charcoal dark:prose-blockquote:border-l-dark-blue-pastel prose-blockquote:bg-mint/10 dark:prose-blockquote:bg-dark-medium/50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg
               prose-img:rounded-xl prose-img:border-2 prose-img:border-light-border dark:prose-img:border-dark-medium"
           >
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{post.content}</ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{localized.content}</ReactMarkdown>
           </div>
         </div>
       </article>

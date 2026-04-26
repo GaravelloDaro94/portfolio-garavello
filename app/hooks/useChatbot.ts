@@ -6,7 +6,7 @@ import { isDoomEasterEggTrigger } from "../utils/doomEasterEgg";
 import { useI18n } from "./useI18n";
 
 export function useChatbot() {
-  const { language, t } = useI18n();
+  const { languageState, t } = useI18n();
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
@@ -47,7 +47,7 @@ export function useChatbot() {
     ]);
     setInput("");
     setIsLoading(false);
-  }, [language, t.chatbot.initialMessage]);
+  }, [languageState, t.chatbot.initialMessage]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -92,7 +92,7 @@ export function useChatbot() {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: [...messages, userMessage], language }),
+        body: JSON.stringify({ messages: [...messages, userMessage], language: languageState }),
       });
 
       if (!response.ok) {

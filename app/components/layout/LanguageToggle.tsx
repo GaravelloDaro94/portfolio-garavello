@@ -3,7 +3,7 @@
 import { useI18n } from "@/app/hooks/useI18n";
 
 export default function LanguageToggle() {
-  const { language, toggleLanguage, t } = useI18n();
+  const { languageState, toggleLanguage, t } = useI18n();
 
   return (
     <button
@@ -13,7 +13,7 @@ export default function LanguageToggle() {
       aria-label={t.languageToggle.ariaLabel}
       title={t.languageToggle.ariaLabel}
     >
-      {language === "es" ? "ES | EN" : "EN | ES"}
+      {languageState === "es" ? "ES | EN" : "EN | ES"}
     </button>
   );
 }

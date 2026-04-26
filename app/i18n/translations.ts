@@ -38,6 +38,10 @@ export interface TranslationSchema {
         title: string;
         description: string;
       };
+      "eventra-platform": {
+        title: string;
+        description: string;
+      };
       "movie-theater": {
         title: string;
         description: string;
@@ -141,13 +145,12 @@ export const translations: Record<Language, TranslationSchema> = {
     about: {
       title: "Sobre Mi",
       paragraphs: [
-        "Soy una persona apasionada por crear soluciones eficientes y elegantes. Para mi, programar es transformar ideas en proyectos utiles y bien disenados.",
-        "Uno de mis logros mas importantes fue desarrollar mi propia ISO de Linux, lo que me permitio aprender en profundidad sobre sistemas operativos y reforzar mi curiosidad por la tecnologia.",
-        "Me gusta escribir codigo claro, limpio y escalable, que facilite el trabajo en equipo y el crecimiento de los proyectos.",
-        "Siempre busco aprender cosas nuevas y mejorar mis habilidades. Creo que el aprendizaje constante es clave para aportar valor como profesional.",
-        "Cuando no estoy programando, me mantengo al dia con las ultimas tendencias en desarrollo web y participo en la comunidad open source.",
+        "Soy un desarrollador orientado a la calidad del software y a la construcción de soluciones robustas, con una fuerte curiosidad técnica y atención al detalle. Me interesa comprender tanto el “qué” como el “cómo” de los sistemas que desarrollo.",
+        "El desarrollo de una ISO propia de Linux marcó un punto clave en mi formación, permitiéndome profundizar en sistemas operativos, automatización y arquitectura, y consolidando mi interés por el funcionamiento interno de la tecnología.",
+        "Trabajo con un enfoque en código limpio, mantenible y escalable, promoviendo buenas prácticas que favorecen la colaboración y la evolución de los productos. Creo firmemente en el aprendizaje continuo y en mantenerse actualizado, tanto a través de la exploración técnica como de la participación en proyectos open source.",
+        "Me motiva el aprendizaje constante y la mejora continua como parte del desarrollo profesional. En mi tiempo libre, sigo de cerca las nuevas tendencias en desarrollo web y participo activamente en la comunidad open source, buscando siempre aprender y aportar.",
       ],
-      chatPrompt: "Tienes preguntas sobre mi experiencia? Chatea con mi asistente virtual:",
+      chatPrompt: "¿Tienes preguntas sobre mi experiencia? Chatea con mi asistente virtual:",
     },
     projects: {
       title: "Proyectos Destacados",
@@ -168,6 +171,11 @@ export const translations: Record<Language, TranslationSchema> = {
           title: "Todo Togetter app",
           description:
             "App mobile con Expo y React Native para gestion colaborativa de tareas. Incluye autenticacion, contactos, asignacion en tiempo real, recordatorios y sincronizacion con backend propio.",
+        },
+        "eventra-platform": {
+          title: "Eventra",
+          description:
+            "Plataforma de gestion de eventos desarrollada con arquitectura modular, APIs documentadas y flujo completo para organizacion, operacion y seguimiento.",
         },
         "movie-theater": {
           title: "Movie Theater",
@@ -228,28 +236,28 @@ export const translations: Record<Language, TranslationSchema> = {
       inputPlaceholder: "Escribe tu pregunta...",
       send: "Enviar",
       initialMessage:
-        "Hola! Soy el asistente virtual de Dario. Puedes preguntarme sobre su experiencia, habilidades, proyectos o cualquier otra cosa relacionada con su trabajo. En que puedo ayudarte?",
+        "¡Hola! Soy el asistente virtual de Dario. Puedes preguntarme sobre su experiencia, habilidades, proyectos o cualquier otra cosa relacionada con su trabajo. ¿En qué puedo ayudarte?.\n\nHay un easter egg escondido, una vez encontrado podrías estar CONDENADO.",
       suggestedQuestions: [
-        "Que tecnologias dominas?",
-        "Cuentame sobre tu experiencia",
-        "Que proyectos has desarrollado?",
-        "Cuales son tus fortalezas?",
+        "¿Qué tecnologías dominas?",
+        "Cuéntame sobre tu experiencia",
+        "¿Qué proyectos has desarrollado?",
+        "¿Cuáles son tus fortalezas?",
       ],
       mobileUnavailable:
-        "Este easter egg no esta disponible en dispositivos moviles. Pruebalo desde una PC.",
-      noReply: "No se recibio respuesta del asistente",
+        "Este easter egg no está disponible en dispositivos móviles. Pruébalo desde una PC.",
+      noReply: "No se recibió respuesta del asistente",
       unknownError: "Error desconocido",
       chatErrorPrefix: "Error en el chat:",
-      connectionError: "Error de conexion. Verifica tu conexion a internet",
+      connectionError: "Error de conexión. Verifica tu conexión a internet",
       assistantErrorPrefix: "Lo siento, hubo un error:",
       assistantErrorSuffix: "Por favor, intenta de nuevo.",
     },
     blog: {
       list: {
         backHome: "Volver al inicio",
-        title: "Blog Tecnico",
-        subtitle: "Articulos sobre desarrollo web, tecnologias y mejores practicas",
-        empty: "Proximamente publicare articulos tecnicos sobre desarrollo web.",
+        title: "Blog técnico",
+        subtitle: "Artículos sobre desarrollo web, tecnologías y mejores prácticas",
+        empty: "Próximamente publicaré artículos técnicos sobre desarrollo web.",
       },
       post: {
         backBlog: "Volver al blog",
@@ -274,11 +282,10 @@ export const translations: Record<Language, TranslationSchema> = {
     about: {
       title: "About Me",
       paragraphs: [
-        "I am passionate about building efficient and elegant solutions. For me, programming means turning ideas into useful and well-designed products.",
-        "One of my most important achievements was building my own Linux ISO, which helped me deeply understand operating systems and strengthen my curiosity for technology.",
-        "I like writing clean, scalable code that supports team collaboration and project growth.",
-        "I am always looking to learn new things and improve my skills. I believe continuous learning is key to delivering value as a professional.",
-        "When I am not coding, I stay up to date with the latest web development trends and contribute to the open source community.",
+        'I am a developer focused on software quality and building robust solutions, with strong technical curiosity and attention to detail. I am interested in understanding both the "what" and the "how" of the systems I build.',
+        "Developing my own Linux ISO marked a key milestone in my growth, allowing me to dive deeper into operating systems, automation, and architecture, while strengthening my interest in the inner workings of technology.",
+        "I work with a clean, maintainable, and scalable code mindset, promoting best practices that support collaboration and product evolution. I firmly believe in continuous learning and staying up to date through both technical exploration and participation in open source projects.",
+        "I am motivated by continuous learning and ongoing improvement as part of professional growth. In my free time, I closely follow new web development trends and actively participate in the open source community, always looking to learn and contribute.",
       ],
       chatPrompt: "Have questions about my experience? Chat with my virtual assistant:",
     },
@@ -301,6 +308,11 @@ export const translations: Record<Language, TranslationSchema> = {
           title: "Todo Togetter app",
           description:
             "A mobile app built with Expo and React Native for collaborative task management. Includes authentication, contacts, real-time assignment, reminders, and sync with a custom backend.",
+        },
+        "eventra-platform": {
+          title: "Eventra",
+          description:
+            "An event management platform built with a modular architecture, documented APIs, and an end-to-end flow for planning, operations, and tracking.",
         },
         "movie-theater": {
           title: "Movie Theater",
@@ -361,7 +373,7 @@ export const translations: Record<Language, TranslationSchema> = {
       inputPlaceholder: "Type your question...",
       send: "Send",
       initialMessage:
-        "Hi! I am Dario's virtual assistant. You can ask me about his experience, skills, projects, or anything related to his work. How can I help you?",
+        "Hi! I am Dario's virtual assistant. You can ask me about his experience, skills, projects, or anything related to his work. How can I help you?\nThere is a hidden easter egg, once found you might be DOOMED.",
       suggestedQuestions: [
         "Which technologies do you master?",
         "Tell me about your experience",

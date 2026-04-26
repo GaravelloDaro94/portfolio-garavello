@@ -3,17 +3,17 @@
 import { createContext, useEffect, useMemo, useState } from "react";
 import { Language, translations, TranslationSchema } from "@/app/i18n/translations";
 
-const STORAGE_KEY = "portfolio-language";
+const STORAGE_KEY = "portfolio-languageState";
 
 export interface I18nContextValue {
-  language: Language;
-  setLanguage: (language: Language) => void;
+  languageState: Language;
+  setLanguage: (languageState: Language) => void;
   toggleLanguage: () => void;
   t: TranslationSchema;
 }
 
 const defaultValue: I18nContextValue = {
-  language: "es",
+  languageState: "es",
   setLanguage: () => undefined,
   toggleLanguage: () => undefined,
   t: translations.es,
@@ -52,8 +52,8 @@ function getRegionFromLocale(locale: string): string | null {
     return null;
   }
 
-  const region = parts[parts.length - 1]?.toUpperCase();
-  return region && region.length === 2 ? region : null;
+  const region = parts.at(-1)?.toUpperCase();
+  return region?.length === 2 ? region : null;
 }
 
 function detectBrowserLanguage(): Language {
@@ -81,23 +81,26 @@ function detectBrowserLanguage(): Language {
   return "en";
 }
 
+function getInitialLanguageState(): Language {
+  if (globalThis.window === undefined) {
+    return "es";
+  }
+
+  const stored = globalThis.localStorage.getItem(STORAGE_KEY);
+  if (stored === "es" || stored === "en") {
+    return stored;
+  }
+
+  return detectBrowserLanguage();
+}
+
 export function LanguageProvider({ children }: Readonly<{ children: React.ReactNode }>) {
-  const [language, setLanguageState] = useState<Language>("es");
+  const [languageState, setLanguageState] = useState<Language>(getInitialLanguageState);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored === "es" || stored === "en") {
-      setLanguageState(stored);
-      return;
-    }
-
-    setLanguageState(detectBrowserLanguage());
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, language);
-    document.documentElement.lang = language === "en" ? "en" : "es";
-  }, [language]);
+    localStorage.setItem(STORAGE_KEY, languageState);
+    document.documentElement.lang = languageState === "en" ? "en" : "es";
+  }, [languageState]);
 
   const setLanguage = (value: Language) => {
     setLanguageState(value);
@@ -109,12 +112,12 @@ export function LanguageProvider({ children }: Readonly<{ children: React.ReactN
 
   const value = useMemo<I18nContextValue>(
     () => ({
-      language,
+      languageState,
       setLanguage,
       toggleLanguage,
-      t: translations[language],
+      t: translations[languageState],
     }),
-    [language]
+    [languageState]
   );
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
