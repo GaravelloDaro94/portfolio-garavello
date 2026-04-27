@@ -81,12 +81,12 @@ function detectBrowserLanguage(): Language {
   return "en";
 }
 
-function getInitialLanguageState(): Language {
-  if (globalThis.window === undefined) {
+function getPersistedLanguageState(): Language {
+  if (typeof window === "undefined") {
     return "es";
   }
 
-  const stored = globalThis.localStorage.getItem(STORAGE_KEY);
+  const stored = window.localStorage.getItem(STORAGE_KEY);
   if (stored === "es" || stored === "en") {
     return stored;
   }
@@ -95,7 +95,12 @@ function getInitialLanguageState(): Language {
 }
 
 export function LanguageProvider({ children }: Readonly<{ children: React.ReactNode }>) {
-  const [languageState, setLanguageState] = useState<Language>(getInitialLanguageState);
+  // Keep SSR and first client render aligned; hydrate persisted/browser language after mount.
+  const [languageState, setLanguageState] = useState<Language>("es");
+
+  useEffect(() => {
+    setLanguageState(getPersistedLanguageState());
+  }, []);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, languageState);

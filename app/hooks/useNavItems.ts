@@ -11,6 +11,6 @@ export function useNavItems(): NavItem[] {
 
   return NAV_SECTIONS.map((id) => ({
     id,
-    label: t.nav[id as keyof typeof t.nav] ?? id,
+    label: t.nav[id],
   }));
 }
