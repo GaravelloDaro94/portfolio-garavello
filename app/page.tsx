@@ -1,6 +1,7 @@
 import DynamicBackground from "./components/layout/DynamicBackground";
 import LoadingAnimation from "./components/animations/LoadingAnimation";
 import HeroOverlay from "./components/HeroOverlay";
+import ScrollToTopOnMount from "./components/ScrollToTopOnMount";
 import MainSection from "./screens/MainSection";
 import AboutSection from "./screens/AboutSection";
 import ProjectsSection from "./screens/ProjectsSection";
@@ -50,6 +51,8 @@ const jsonLd = {
 export default function Home() {
   return (
     <>
+      <ScrollToTopOnMount />
+
       {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"
@@ -66,7 +69,7 @@ export default function Home() {
               <MainSection />
             </aside>
 
-            <div className="space-y-10 pb-10 sm:space-y-12 lg:space-y-16 lg:pt-6">
+            <div className="lg:pt-6">
               <AboutSection />
               <SkillsSection />
               <ProjectsSection />
