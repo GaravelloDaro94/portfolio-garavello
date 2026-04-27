@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { SectionId, ALL_SECTIONS } from "../models";
+import { preventDefault } from "../utils/handler";
 
 export function useHeader() {
   const [scrolled, setScrolled] = useState(false);
@@ -8,9 +9,15 @@ export function useHeader() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+      // Rehabilitar
+      window.removeEventListener("wheel", preventDefault);
+      window.removeEventListener("touchmove", preventDefault);
 
       if (window.scrollY < 80) {
         setActiveSection("home");
+        // Deshabilitar
+        window.addEventListener("wheel", preventDefault, { passive: false }); // Rueda ratón
+        window.addEventListener("touchmove", preventDefault, { passive: false }); // Móvil
       }
     };
 
