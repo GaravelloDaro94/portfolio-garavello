@@ -10,8 +10,8 @@ export default function ContactSection() {
   const { t } = useI18n();
 
   return (
-    <section id="contact" className="min-h-screen flex items-center justify-center px-4 sm:px-6 pl-12 sm:pl-16 py-12 sm:py-20">
-      <div className="max-w-4xl w-full">
+    <section id="contact" className="min-h-screen px-1 py-8 sm:px-2 sm:py-10 lg:py-14">
+      <div className="w-full max-w-5xl">
         <TypewriterTitle 
           text={t.contact.title}
           className="text-2xl sm:text-3xl md:text-4xl font-bold text-light-text dark:text-dark-smoke mb-6 sm:mb-8"

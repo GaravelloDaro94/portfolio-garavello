@@ -1,46 +1,62 @@
 "use client";
 
 import TypewriterEffect from "../components/animations/TypewriterEffect";
+import Header from "../components/layout/Header";
 import { useHeader } from "../hooks/useHeader";
 import { useI18n } from "../hooks/useI18n";
 import { TEXT_PRIMARY, GLASSMORPHISM_BASE, SHADOW_BASE, SHADOW_HOVER } from "../utils/styles";
 
 export default function MainSection() {
-  const { scrollToSection } = useHeader();
+  const { scrolled, scrollToSection } = useHeader();
   const { t } = useI18n();
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center px-4 sm:px-6 pl-12 sm:pl-16">
-      <div className="max-w-4xl w-full">
-        <div className="space-y-4 sm:space-y-6">
-          <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold ${TEXT_PRIMARY} leading-tight`}>
-            Darío
-            <br />
-            <span className="ml-8 sm:ml-12 md:ml-18">Garavello</span>
-          </h1>
-          <p className="ml-12 sm:ml-24 md:ml-36 text-xl sm:text-2xl md:text-3xl text-light-text dark:text-dark-blue-pastel font-light">
-            <TypewriterEffect phrases={[...t.main.phrases]} />
-          </p>
-          <div className="pt-8 flex justify-center">
-            <button 
-              onClick={() => scrollToSection("about")}
-              className={`p-3 rounded-xl transition-all cursor-pointer ${GLASSMORPHISM_BASE} ${SHADOW_BASE} ${SHADOW_HOVER}`}
-              aria-label={t.main.scrollToAboutAria}
-            >
-              <svg 
-                className={`w-8 h-8 ${TEXT_PRIMARY} animate-bounce`}
-                fill="none" 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth="2" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-              >
-                <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
+    <section
+      id="home"
+      className={`flex flex-col justify-between gap-8 py-6 px-4 transition-all duration-300 ${
+        scrolled
+          ? "fixed top-0 left-0 z-20 h-screen w-[33vw] min-w-[290px] max-w-[33vw]"
+          : "h-full opacity-0 pointer-events-none"
+      }`}
+    >
+      <div className="space-y-5">
+        <h1
+          className={`text-4xl font-bold leading-[0.95] sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl ${TEXT_PRIMARY}`}
+        >
+          Darío
+          <br />
+          <span className="ml-7 sm:ml-10">Garavello</span>
+        </h1>
+
+        <p
+          className="font-light text-base sm:text-xl text-light-text dark:text-dark-blue-pastel"
+        >
+          <TypewriterEffect phrases={[...t.main.phrases]} />
+        </p>
+      </div>
+
+      <div>
+        <Header variant="compact" />
+      </div>
+
+      <div className="pt-2 hidden lg:block">
+        <button
+          onClick={() => scrollToSection("about")}
+          className={`p-3 rounded-xl transition-all cursor-pointer lg:inline-flex ${GLASSMORPHISM_BASE} ${SHADOW_BASE} ${SHADOW_HOVER}`}
+          aria-label={t.main.scrollToAboutAria}
+        >
+          <svg
+            className={`h-6 w-6 ${TEXT_PRIMARY} animate-bounce`}
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
+        </button>
       </div>
     </section>
   );

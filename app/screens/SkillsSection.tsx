@@ -1,72 +1,128 @@
 "use client";
 
+import Link from "next/link";
 import TypewriterTitle from "../components/animations/TypewriterTitle";
 import FadeInCard from "../components/animations/FadeInCard";
 import { useI18n } from "../hooks/useI18n";
 import { TEXT_PRIMARY, GLASSMORPHISM_BASE, SHADOW_BASE, TEXT_ACCENT } from "../utils/styles";
 
 export default function SkillsSection() {
-  const { t } = useI18n();
+  const { languageState } = useI18n();
 
-  const skillCategories = [
+  const isSpanish = languageState === "es";
+
+  const experiences = [
     {
-      title: "Frontend",
-      skills: ["React & Next.js", "TypeScript", "Tailwind CSS", "HTML5 & CSS3", "Redux & Zustand"]
+      period: isSpanish ? "Dic 2021 - Actualidad" : "Dec 2021 - Present",
+      role: "Software Engineer - Fullstack / Mobile Developer",
+      company: "Grupo Logístico Andreani",
+      highlights: isSpanish
+        ? [
+            "Desarrollo y mantenimiento de aplicaciones mobile, web y backend para operaciones logísticas críticas.",
+            "Stack principal: React Native + TypeScript + Redux Toolkit, React + Material UI, APIs REST con .NET Core y Node.js.",
+            "Trabajo con SQL Server, Oracle y MongoDB; despliegues en Azure y OpenShift/Rancher.",
+            "Testing con Jest, Vitest, Supertest y Playwright; CI/CD con GitHub Actions y GitLab CI.",
+          ]
+        : [
+            "Development and maintenance of mobile, web, and backend apps for mission-critical logistics operations.",
+            "Main stack: React Native + TypeScript + Redux Toolkit, React + Material UI, REST APIs in .NET Core and Node.js.",
+            "Worked with SQL Server, Oracle, and MongoDB; deployments on Azure and OpenShift/Rancher.",
+            "Testing with Jest, Vitest, Supertest, and Playwright; CI/CD with GitHub Actions and GitLab CI.",
+          ],
     },
     {
-      title: "Backend",
-      skills: ["Node.js & Express", "REST APIs", "PostgreSQL & MongoDB", "Authentication & JWT", "Docker"]
+      period: isSpanish ? "Oct 2020 - Nov 2021" : "Oct 2020 - Nov 2021",
+      role: "Fullstack Engineer & Technical Lead",
+      company: "Konzortia Capital",
+      highlights: isSpanish
+        ? [
+            "Desarrollo end-to-end de productos web, mobile y backend para distintos clientes.",
+            "Implementación de interfaces con React, Vue y WordPress; apps híbridas con Cordova.",
+            "Construcción de APIs REST con Node.js y despliegues en AWS EC2.",
+            "Liderazgo técnico: lineamientos de arquitectura, revisión de código y acompañamiento del equipo.",
+          ]
+        : [
+            "End-to-end delivery of web, mobile, and backend products for multiple clients.",
+            "UI implementation with React, Vue, and WordPress; hybrid apps with Cordova.",
+            "REST API development with Node.js and deployments on AWS EC2.",
+            "Technical leadership: architecture guidelines, code review, and team mentoring.",
+          ],
     },
     {
-      title: t.skills.categories.tools,
-      skills: ["Git & GitHub", "VS Code", "Figma", "Postman", "Vercel & Netlify"]
+      period: isSpanish ? "Mar 2017 - Actualidad" : "Mar 2017 - Present",
+      role: isSpanish ? "Freelance Fullstack Developer" : "Freelance Fullstack Developer",
+      company: isSpanish
+        ? "Livia Accesorios y proyectos independientes"
+        : "Livia Accesorios and independent projects",
+      highlights: isSpanish
+        ? [
+            "Creación de soluciones para e-commerce, gestión y MVPs con foco en resultados de negocio.",
+            "Desarrollo fullstack con Next.js, React, TypeScript, Node.js, Express, GraphQL y PostgreSQL/Supabase.",
+            "Integración de pagos con Stripe y Mercado Pago, autenticación por roles y APIs seguras.",
+            "Automatizaciones e integraciones con Zapier y APIs externas, fácilmente transferibles a n8n.",
+          ]
+        : [
+            "Built ecommerce, management systems, and MVP products focused on business outcomes.",
+            "Fullstack development with Next.js, React, TypeScript, Node.js, Express, GraphQL, and PostgreSQL/Supabase.",
+            "Payment integrations with Stripe and Mercado Pago, role-based auth, and secure APIs.",
+            "Automation and integrations with Zapier and external APIs, easily transferable to n8n.",
+          ],
     },
-    {
-      title: t.skills.categories.other,
-      skills: [
-        t.skills.items.teamwork,
-        t.skills.items.problemSolving,
-        t.skills.items.communication,
-        t.skills.items.continuousLearning,
-        t.skills.items.timeManagement,
-      ]
-    }
   ];
 
   return (
-    <section id="skills" className="min-h-screen flex items-center justify-center px-4 sm:px-6 pl-12 sm:pl-16 py-12 sm:py-20">
-      <div className="w-4/5 max-w-6xl">
-        <TypewriterTitle 
-          text={t.skills.title}
+    <section id="skills" className="min-h-screen px-1 py-8 sm:px-2 sm:py-10 lg:py-14">
+      <div className="w-full">
+        <TypewriterTitle
+          text={isSpanish ? "Experiencias laborales" : "Work Experience"}
           className={`text-2xl sm:text-3xl md:text-4xl font-bold ${TEXT_PRIMARY} mb-6 sm:mb-8`}
         />
-        {/* Scroll horizontal en móvil, grid en desktop */}
-        <div className="overflow-x-auto overflow-y-hidden md:overflow-visible pb-4 md:pb-0 -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 scrollbar-hide">
-          <div className="flex md:grid md:grid-cols-2 gap-6 snap-x snap-mandatory md:snap-none md:w-full">
-            {skillCategories.map((category, index) => (
-              <FadeInCard
-                key={category.title}
-                delay={index * 100}
-                className=" min-w-[280px] max-w-[360px] md:w-auto md:min-w-0 md:max-w-none snap-center flex-shrink-0"
+        <div className="space-y-5">
+          {experiences.map((experience, index) => (
+            <FadeInCard key={experience.company} delay={index * 120}>
+              <article
+                className={`rounded-2xl p-5 sm:p-6 ${GLASSMORPHISM_BASE} transition-all ${SHADOW_BASE} hover:shadow-xl hover:shadow-yellow/30 dark:hover:shadow-dark-blue-pastel/30`}
               >
-                <div>
-                  <h3 className={`text-lg text-center md:text-left sm:text-xl font-semibold ${TEXT_PRIMARY} mb-2 sm:mb-3`}>
-                    {category.title}
+                <div className="mb-4 flex flex-col gap-2 border-b border-light-text/10 pb-4 dark:border-gray-700">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-light-text/70 dark:text-gray-400">
+                    {experience.period}
+                  </p>
+                  <h3 className={`text-lg font-semibold sm:text-xl ${TEXT_PRIMARY}`}>
+                    {experience.role}
                   </h3>
-                  <div className={`rounded-2xl p-4 sm:p-5 ${GLASSMORPHISM_BASE} transition-all ${SHADOW_BASE} hover:shadow-xl hover:shadow-yellow/30 dark:hover:shadow-dark-blue-pastel/30`}>
-                    <ul className="grid md:grid-cols-2 gap-x-4 gap-y-1.5 sm:gap-y-2">
-                      {category.skills.map((skill) => (
-                        <li key={skill} className="flex items-center gap-2">
-                          <span className={`${TEXT_ACCENT} text-base flex-shrink-0`}>✳</span>
-                          <span className="text-xs sm:text-sm text-light-text dark:text-gray-400">{skill}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  <p className="text-sm text-light-text dark:text-gray-300">{experience.company}</p>
                 </div>
-              </FadeInCard>
-            ))}
-          </div>
+
+                <ul className="space-y-2.5">
+                  {experience.highlights.map((highlight) => (
+                    <li key={highlight} className="flex items-start gap-2.5">
+                      <span className={`${TEXT_ACCENT} mt-1 text-sm`}>✳</span>
+                      <span className="text-sm leading-relaxed text-light-text dark:text-gray-300">
+                        {highlight}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </FadeInCard>
+          ))}
+        </div>
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          <Link
+            href={isSpanish ? "/cv/es" : "/cv/en"}
+            target="_blank"
+            className="flex w-full items-center gap-2 rounded-lg border border-light-border/40  px-4 py-2 text-sm font-semibold text-light-text transition-colors hover:bg-white/65 dark:border-dark-medium/70 dark:bg-dark-medium/45 dark:text-gray-200 dark:hover:bg-dark-medium/70"
+          >
+            {isSpanish ? "Ver CV completo" : "View full resume"}
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+              />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>

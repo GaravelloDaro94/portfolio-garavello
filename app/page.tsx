@@ -1,13 +1,11 @@
-import Header from "./components/layout/Header";
 import DynamicBackground from "./components/layout/DynamicBackground";
 import LoadingAnimation from "./components/animations/LoadingAnimation";
-import HorizontalScroll from "./components/layout/HorizontalScroll";
+import HeroOverlay from "./components/HeroOverlay";
 import MainSection from "./screens/MainSection";
 import AboutSection from "./screens/AboutSection";
 import ProjectsSection from "./screens/ProjectsSection";
 import SkillsSection from "./screens/SkillsSection";
 import ContactSection from "./screens/ContactSection";
-import Footer from "./screens/Footer";
 import { getSiteUrl } from "@/lib/site";
 
 const siteUrl = getSiteUrl();
@@ -60,31 +58,22 @@ export default function Home() {
       
       <LoadingAnimation />
       <DynamicBackground />
-      <Header />
-      <Footer />
-      <main className="snap-y snap-mandatory overflow-y-scroll h-screen relative z-10 scrollbar-y-hide-mobile">
-        {/* Main Section - Scroll vertical normal */}
-        <section className="snap-start min-h-screen">
-          <MainSection />
-        </section>
-        
-        {/* Horizontal Scroll Container */}
-        <section className="snap-start">
-          <HorizontalScroll>
-            <div className="w-full h-screen flex-shrink-0 snap-start">
+      <HeroOverlay />
+      <main className="relative z-10 pt-[100vh]">
+        <div className="mx-auto max-w-[1800px] px-4 pb-12 pt-4 sm:px-6 lg:px-8 lg:pt-6">
+          <div className="grid gap-8 lg:grid-cols-[minmax(290px,33vw)_1fr] lg:gap-10 xl:gap-14">
+            <aside className="hidden lg:block">
+              <MainSection />
+            </aside>
+
+            <div className="space-y-10 pb-10 sm:space-y-12 lg:space-y-16 lg:pt-6">
               <AboutSection />
-            </div>
-            <div className="w-full h-screen flex-shrink-0 snap-start">
-              <ProjectsSection />
-            </div>
-            <div className="w-full h-screen flex-shrink-0 snap-start">
               <SkillsSection />
-            </div>
-            <div className="w-full h-screen flex-shrink-0 snap-start">
+              <ProjectsSection />
               <ContactSection />
             </div>
-          </HorizontalScroll>
-        </section>
+          </div>
+        </div>
       </main>
     </>
   );

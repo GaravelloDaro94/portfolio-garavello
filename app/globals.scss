@@ -44,10 +44,9 @@ body {
   background-size: 600% 600%;
   animation: gradientMove 20s ease infinite;
   font-family: var(--font-nunito-sans), Arial, Helvetica, sans-serif;
-  scroll-snap-type: y mandatory;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
-  height: 100vh;
+  min-height: 100vh;
 
   .dark & {
     background: var(--background);
@@ -155,6 +154,32 @@ h6 {
     stroke-dashoffset: 0;
     opacity: 1;
   }
+}
+
+@keyframes slideInCascade {
+  0% {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dockToLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-24px) translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) translateY(0);
+  }
+}
+
+.docked-main {
+  animation: dockToLeft 0.45s ease forwards;
 }
 
 // Wave Stripes Background

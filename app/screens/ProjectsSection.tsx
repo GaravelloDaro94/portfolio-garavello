@@ -12,49 +12,46 @@ export default function ProjectsSection() {
   const projects = useProjects();
 
   return (
-    <section id="projects" className="h-full flex items-center justify-center px-4 sm:px-6 pl-12 sm:pl-16 py-8 sm:py-10 md:py-20">
-      <div className="max-w-6xl w-full">
+    <section id="projects" className="min-h-screen px-1 py-8 sm:px-2 sm:py-10 lg:py-14">
+      <div className="w-full">
         <TypewriterTitle
           text={t.projects.title}
-          className={`text-2xl sm:text-3xl md:text-4xl font-bold ${TEXT_PRIMARY} mb-8 sm:mb-8`}
+          className={`text-2xl sm:text-3xl md:text-4xl font-bold ${TEXT_PRIMARY} mb-7 sm:mb-8`}
         />
 
-        {/* Scroll horizontal en móvil, grid en desktop */}
-        <div className="overflow-x-auto overflow-y-hidden md:overflow-visible pb-4 md:pb-0 -mx-4 px-4 sm:-mx-6 sm:px-6 md:mx-0 md:px-0 scrollbar-hide">
-          <div className="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 snap-x snap-mandatory md:snap-none md:w-full">
-            {projects.map((project, index) => (
-              <FadeInCard key={project.id} delay={index * 100}>
-                <div
-                  className={`group rounded-2xl overflow-hidden hover:bg-yellow/10 dark:hover:bg-dark-blue-pastel/10 transition-all ${GLASSMORPHISM_BASE} ${SHADOW_BASE} hover:shadow-xl hover:shadow-yellow/30 dark:hover:shadow-dark-blue-pastel/30 w-[84vw] min-w-[280px] max-w-[360px] md:w-auto md:min-w-0 md:max-w-none snap-center flex-shrink-0`}
-                >
-                  {/* Media del proyecto */}
-                  <div className="w-full h-48 flex-shrink-0 bg-gradient-to-br from-mint/30 to-yellow/30 dark:from-dark-blue-gray/50 dark:to-dark-blue-pastel/50 flex items-center justify-center relative overflow-hidden">
+        <div className="space-y-5">
+          {projects.map((project, index) => (
+            <FadeInCard key={project.id} delay={index * 100}>
+              <article
+                className={`group overflow-hidden rounded-2xl transition-all hover:bg-yellow/10 dark:hover:bg-dark-blue-pastel/10 ${GLASSMORPHISM_BASE} ${SHADOW_BASE} hover:shadow-xl hover:shadow-yellow/30 dark:hover:shadow-dark-blue-pastel/30`}
+              >
+                <div className="flex flex-col md:min-h-[260px] md:flex-row">
+                  <div className="flex items-center justify-center relative h-48 w-full overflow-hidden bg-gradient-to-br from-mint/30 to-yellow/30 md:h-auto md:w-[38%] lg:w-[34%] dark:from-dark-blue-gray/50 dark:to-dark-blue-pastel/50">
                     <ProjectMedia project={project} />
                   </div>
 
-                  {/* Contenido */}
-                  <div className="p-4 space-y-2 flex-shrink-0">
-                    <h3 className={`text-lg font-semibold ${TEXT_PRIMARY} line-clamp-2`}>
+                  <div className="flex w-full flex-col gap-4 p-4 sm:p-5 md:w-[62%] lg:w-[66%]">
+                    <h3 className={`text-lg font-semibold leading-tight sm:text-xl ${TEXT_PRIMARY}`}>
                       {project.title}
                     </h3>
-                    <p className="text-sm text-light-text dark:text-gray-400 line-clamp-3">
+
+                    <p className="text-sm leading-relaxed text-light-text dark:text-gray-300 sm:text-[0.95rem]">
                       {project.description}
                     </p>
 
-                    <div className="flex flex-wrap gap-2 pt-1">
+                    <div className="flex flex-wrap gap-2">
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-3 py-1 bg-mint dark:bg-dark-blue-gray text-light-text dark:text-gray-300 text-xs rounded-full"
+                          className="rounded-full bg-mint px-3 py-1 text-[11px] font-semibold text-light-text dark:bg-dark-blue-gray dark:text-gray-300"
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
 
-                    {/* Links */}
                     {(project.demoUrl || project.repoUrls.length > 0 || project.mobileLinks) && (
-                      <div className="flex flex-wrap gap-2 pt-3 border-t border-light-text/10 dark:border-gray-700 mt-3">
+                      <div className="mt-auto flex flex-wrap gap-2 border-t border-light-text/10 pt-3 dark:border-gray-700">
                         {project.demoUrl && (
                           <a
                             href={project.demoUrl}
@@ -63,7 +60,12 @@ export default function ProjectsSection() {
                             className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${TEXT_ACCENT} hover:bg-yellow/20 dark:hover:bg-dark-blue-pastel/20`}
                           >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                              />
                             </svg>
                             {t.projects.labels.demoProject}
                           </a>
@@ -92,7 +94,12 @@ export default function ProjectsSection() {
                             className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${TEXT_ACCENT} hover:bg-yellow/20 dark:hover:bg-dark-blue-pastel/20`}
                           >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
+                              />
                             </svg>
                             Expo Go
                           </a>
@@ -106,7 +113,12 @@ export default function ProjectsSection() {
                             className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${TEXT_ACCENT} hover:bg-yellow/20 dark:hover:bg-dark-blue-pastel/20`}
                           >
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                              />
                             </svg>
                             {t.projects.labels.downloadApk}
                           </a>
@@ -115,9 +127,9 @@ export default function ProjectsSection() {
                     )}
                   </div>
                 </div>
-              </FadeInCard>
-            ))}
-          </div>
+              </article>
+            </FadeInCard>
+          ))}
         </div>
       </div>
     </section>
