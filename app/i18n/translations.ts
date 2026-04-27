@@ -126,7 +126,7 @@ export const translations: Record<Language, TranslationSchema> = {
     nav: {
       about: "Sobre mí",
       projects: "proyectos",
-      skills: "habilidades",
+      skills: "experiencias",
       contact: "contacto",
       blog: "Blog",
     },
@@ -185,7 +185,7 @@ export const translations: Record<Language, TranslationSchema> = {
       },
     },
     skills: {
-      title: "Habilidades",
+      title: "Experiencias laborales",
       categories: {
         tools: "Herramientas",
         other: "Otras Competencias",
@@ -268,7 +268,7 @@ export const translations: Record<Language, TranslationSchema> = {
     nav: {
       about: "about",
       projects: "projects",
-      skills: "skills",
+      skills: "experience",
       contact: "contact",
       blog: "Blog",
     },
@@ -322,7 +322,7 @@ export const translations: Record<Language, TranslationSchema> = {
       },
     },
     skills: {
-      title: "Skills",
+      title: "Work Experience",
       categories: {
         tools: "Tools",
         other: "Other Skills",
