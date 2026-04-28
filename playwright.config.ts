@@ -87,7 +87,7 @@ export default defineConfig({
   webServer: skipWebServer
     ? undefined
     : {
-        command: `pnpm run dev -- --port ${port}`,
+        command: `pnpm exec next dev -p ${port}`,
         url: baseURL,
         reuseExistingServer: !process.env.CI,
         timeout: 120000, // 2 minutos para que el servidor inicie
