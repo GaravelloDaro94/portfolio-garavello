@@ -41,6 +41,6 @@ describe("useHeader", () => {
       result.current.scrollToSection("about");
     });
 
-    expect(mockElement.scrollIntoView).toHaveBeenCalledWith({ behavior: "smooth" });
+    expect(mockElement.scrollIntoView).toHaveBeenCalledWith({ behavior: "smooth", block: "start" });
   });
 });
