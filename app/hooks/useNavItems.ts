@@ -1,8 +1,10 @@
 import { useI18n } from "./useI18n";
-import { NAV_SECTIONS, SectionId } from "../models";
+import { NAV_SECTIONS } from "../models";
+
+type NavSectionId = (typeof NAV_SECTIONS)[number];
 
 export interface NavItem {
-  id: SectionId;
+  id: NavSectionId;
   label: string;
 }
 

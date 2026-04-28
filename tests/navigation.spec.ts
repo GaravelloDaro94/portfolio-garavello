@@ -1,5 +1,7 @@
 import { test, expect } from "@playwright/test";
 
+const ABOUT_LABEL = /sobre mí|about/i;
+
 test.describe("Portfolio - Navegación Principal", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/", { waitUntil: "domcontentloaded" });
@@ -10,11 +12,11 @@ test.describe("Portfolio - Navegación Principal", () => {
   });
 
   test("debe mostrar el header con navegación", async ({ page }) => {
-    const header = page.locator("header");
+    const header = page.locator("header").first();
     await expect(header).toBeVisible();
 
     // Verificar botón DG
-    const dgButton = page.getByRole("button", { name: "DG" });
+    const dgButton = page.getByRole("banner").getByRole("button", { name: "DG" });
     await expect(dgButton).toBeVisible();
   });
 
@@ -41,8 +43,7 @@ test.describe("Portfolio - Navegación Principal", () => {
   });
 
   test("debe navegar correctamente usando el menú", async ({ page }) => {
-    // Click en botón de About del header - usar first() para obtener el del menú
-    const aboutButton = page.getByRole("button", { name: /about/i }).first();
+    const aboutButton = page.getByRole("banner").getByRole("button", { name: ABOUT_LABEL });
     await aboutButton.click();
 
     // Esperar scroll

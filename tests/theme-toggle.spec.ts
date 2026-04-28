@@ -46,9 +46,10 @@ test.describe("Portfolio - Tema Claro/Oscuro", () => {
 
     // Recargar la página
     await page.reload();
-    await page.waitForLoadState("networkidle");
+    await page.waitForLoadState("domcontentloaded");
 
     // El tema debería persistir (verificar localStorage)
+    await page.waitForFunction(() => localStorage.getItem("theme") !== null);
     const theme = await page.evaluate(() => localStorage.getItem("theme"));
     expect(theme).toBeTruthy();
   });
