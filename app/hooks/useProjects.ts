@@ -24,6 +24,7 @@ export interface Project {
   demoUrl: string;
   repoUrls: ProjectRepoUrl[];
   imageUrl: StaticImageData | null;
+  category: "featured" | "mockup";
   mobileLinks?: ProjectMobileLinks;
 }
 
@@ -32,6 +33,16 @@ export function useProjects(): Project[] {
 
   return [
     {
+      id: "amazonia-creativa",
+      title: t.projects.items["amazonia-creativa"].title,
+      description: t.projects.items["amazonia-creativa"].description,
+      tags: ["Next.js", "Supabase", "GSAP", "Lenis", "SCSS", "TypeScript", "ImageKit", "PayPal"],
+      demoUrl: "https://www.amzcreativastudio.com",
+      repoUrls: [{ label: "Repo", url: "https://gitlab.com/garavello.manuel/amazonia-creativa" }],
+      imageUrl: null,
+      category: "featured",
+    },
+    {
       id: "ecommerce-platform",
       title: t.projects.items["ecommerce-platform"].title,
       description: t.projects.items["ecommerce-platform"].description,
@@ -39,6 +50,7 @@ export function useProjects(): Project[] {
       demoUrl: "https://www.liviaccesorios.com.ar/",
       repoUrls: [{ label: "Repo", url: "https://gitlab.com/garavello.manuel/livia-accesorios" }],
       imageUrl: liviaAccesoriosImage,
+      category: "featured",
     },
     {
       id: "task-management-app",
@@ -57,6 +69,7 @@ export function useProjects(): Project[] {
       demoUrl: "",
       repoUrls: [],
       imageUrl: null,
+      category: "mockup",
       mobileLinks: {
         expoGo: "https://expo.dev/@dario.garavello/to-do-getter",
         apk: "https://expo.dev/artifacts/eas/eTh47NcBEEApJtLZMasQdm.apk",
@@ -74,6 +87,7 @@ export function useProjects(): Project[] {
         { label: "Swagger", url: "https://eventra-platform-demo.fly.dev/api/documentation" },
       ],
       imageUrl: eventraImage,
+      category: "mockup",
     },
     {
       id: "movie-theater",
@@ -86,6 +100,7 @@ export function useProjects(): Project[] {
         { label: "Backend", url: "https://gitlab.com/garavello.manuel/movie-theater-backend" },
       ],
       imageUrl: movieTheaterImage,
+      category: "mockup",
     },
   ];
 }

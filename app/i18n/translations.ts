@@ -22,6 +22,10 @@ export interface TranslationSchema {
   };
   projects: {
     title: string;
+    sections: {
+      featured: string;
+      mockup: string;
+    };
     labels: {
       demoProject: string;
       downloadApk: string;
@@ -30,6 +34,10 @@ export interface TranslationSchema {
       apkSoon: string;
     };
     items: {
+      "amazonia-creativa": {
+        title: string;
+        description: string;
+      };
       "ecommerce-platform": {
         title: string;
         description: string;
@@ -153,7 +161,11 @@ export const translations: Record<Language, TranslationSchema> = {
       chatPrompt: "¿Tienes preguntas sobre mi experiencia? Chatea con mi asistente virtual:",
     },
     projects: {
-      title: "Proyectos Destacados",
+      title: "Proyectos",
+      sections: {
+        featured: "Proyectos Destacados",
+        mockup: "Proyectos Mockup",
+      },
       labels: {
         demoProject: "Ver Proyecto",
         downloadApk: "Descargar APK",
@@ -162,6 +174,11 @@ export const translations: Record<Language, TranslationSchema> = {
         apkSoon: "APK pronto",
       },
       items: {
+        "amazonia-creativa": {
+          title: "Amazonia Creativa",
+          description:
+            "Sitio web para un estudio creativo con showcase de proyectos animados (GSAP/Lenis), panel de administración para gestión de contenido, pagos con PayPal e integración con ImageKit para carga de imágenes.",
+        },
         "ecommerce-platform": {
           title: "E-commerce Livia Accesorios",
           description:
@@ -290,7 +307,11 @@ export const translations: Record<Language, TranslationSchema> = {
       chatPrompt: "Have questions about my experience? Chat with my virtual assistant:",
     },
     projects: {
-      title: "Featured Projects",
+      title: "Projects",
+      sections: {
+        featured: "Featured Projects",
+        mockup: "Mockup Projects",
+      },
       labels: {
         demoProject: "View Project",
         downloadApk: "Download APK",
@@ -299,6 +320,11 @@ export const translations: Record<Language, TranslationSchema> = {
         apkSoon: "APK soon",
       },
       items: {
+        "amazonia-creativa": {
+          title: "Amazonia Creativa",
+          description:
+            "Website for a creative studio with an animated project showcase (GSAP/Lenis), a content management admin panel, PayPal payments, and ImageKit integration for image uploads.",
+        },
         "ecommerce-platform": {
           title: "Livia Accesorios E-commerce",
           description:
