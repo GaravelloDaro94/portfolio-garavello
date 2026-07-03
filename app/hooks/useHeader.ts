@@ -1,29 +1,37 @@
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import { SectionId, ALL_SECTIONS } from "../models";
 import { preventDefault } from "../utils/handler";
 
 export function useHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<SectionId>("home");
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
-      // Rehabilitar
+      // Always release the lock first
       window.removeEventListener("wheel", preventDefault);
       window.removeEventListener("touchmove", preventDefault);
 
-      if (window.scrollY < 80) {
+      if (isHome && window.scrollY < 80) {
         setActiveSection("home");
-        // Deshabilitar
+        // Re-apply lock only on the home hero
         window.addEventListener("wheel", preventDefault, { passive: false }); // Rueda ratón
         window.addEventListener("touchmove", preventDefault, { passive: false }); // Móvil
       }
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      // Always clean up the scroll lock on unmount
+      window.removeEventListener("wheel", preventDefault);
+      window.removeEventListener("touchmove", preventDefault);
+    };
+  }, [isHome]);
 
   useEffect(() => {
     if (typeof IntersectionObserver === "undefined") {
