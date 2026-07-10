@@ -3,6 +3,7 @@
 import type { StaticImageData } from "next/image";
 import movieTheaterImage from "../assets/movie-theater.png";
 import liviaAccesoriosImage from "../assets/livia-accesorios.png";
+import amazoniaCreativaImage from "../assets/amazonia-creativa.png";
 import eventraImage from "../assets/eventra.png";
 import { useI18n } from "./useI18n";
 
@@ -39,7 +40,7 @@ export function useProjects(): Project[] {
       tags: ["Next.js", "Supabase", "GSAP", "Lenis", "SCSS", "TypeScript", "ImageKit", "PayPal"],
       demoUrl: "https://www.amzcreativastudio.com",
       repoUrls: [{ label: "Repo", url: "https://gitlab.com/garavello.manuel/amazonia-creativa" }],
-      imageUrl: null,
+      imageUrl: amazoniaCreativaImage,
       category: "featured",
     },
     {
